@@ -7,12 +7,12 @@ Implemented by following examples and exercises from the C# Player's Guide.
 ## TODO
 
 - Core Game
-  - [ ] Building Character
-  - [ ] The True Programmer
-  - [ ] Actions and Players
-  - [ ] Attacks
-  - [ ] Damage and HP
-  - [ ] Death
+  - [X] Building Character
+  - [X] The True Programmer
+  - [X] Actions and Players
+  - [X] Attacks
+  - [X] Damage and HP
+  - [X] Death
   - [ ] Battle Series
   - [ ] The Uncoded One
   - [ ] The Player Decides
