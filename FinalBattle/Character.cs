@@ -2,88 +2,84 @@ namespace FinalBattle;
 
 public class Character
 {
-    public string name { get; }
-    private int maxHP { get; init; }
-    public int currentHP { get; set; }
-    private bool AI { get; }
+    private readonly string _name;
+    private int MaxHp { get; }
+    private int _currentHp;
+    private bool Ai { get; }
     private bool Hero { get; }
-    private Random randomNumber = new Random();
+    private readonly Random _randomNumber = new Random();
     public Character( string characterType = "SKELETON", bool computerControlled = true, bool heroClass = false )
     {
-        name = characterType;
-        AI = computerControlled;
+        _name = characterType;
+        Ai = computerControlled;
         Hero = heroClass;
-        if (Hero)
-        {
-            maxHP = 25;
-            currentHP = maxHP;
-        }
-        else
-        {
-            maxHP = 5;
-            currentHP = maxHP;
-        }
+        MaxHp = (Hero) ? 8 : 5; // If character is hero, MaxHp = 8 else, MaxHp = 5;
+        _currentHp = MaxHp;
     }
     public void Move(Character defender)
     {
         Enum action;
-        if (AI)
+        if (Ai)
         {
             // Generates a random number based off the number of moves in _Action
             // then selects that action that cooresponds to the number.
-            action = (_Action)randomNumber.Next(Enum.GetNames(typeof(_Action)).Length);
+            action = (Action)_randomNumber.Next(Enum.GetNames<Action>().Length);
         }
         else
         {
             Console.WriteLine("What would you like to do?");
-            Console.ReadKey();
-            action = _Action.Nothing;
+            // Console.ReadKey();
+            action = Action.Nothing;
         }
 
         switch (action)
         {
-            case _Action.Nothing:
-                Console.WriteLine($"{name} did NOTHING.");
+            case Action.Nothing:
+                Console.WriteLine($"{_name} did NOTHING.");
                 break;
-            case _Action.Attack:
-                PerformAction(name, _Action.Attack, defender);
+            case Action.Attack:
+                PerformAction(_name, Action.Attack, defender);
                 break;
         }
-    }
-
-    public enum _Action
-    {
-        Nothing,
-        Attack
     }
     
     /// <summary>
     /// Displays the character name and action
     /// </summary>
-    /// <param name="name"></param>
-    /// <param name="action"></param>
-    private void PerformAction(string attackerName, _Action attackerAction, Character defender)
+    /// <param name="attackerName"></param>
+    /// <param name="attackerAction"></param>
+    /// <param name="defender"></param>
+    private void PerformAction(string attackerName, Action attackerAction, Character defender)
     {
-        string action = nameof(_Action.Nothing).ToUpper();
-        int attackerDamage = 100;
-        if(attackerAction == _Action.Attack)
+        string action = nameof(Action.Nothing).ToUpper();
+        int attackerDamage = 0;
+        if(attackerAction == Action.Attack)
         {
             if (attackerName.Equals("SKELETON"))
             {
                 action = "BONE CRUNCH";
-                attackerDamage = randomNumber.Next(2);
-                defender.currentHP = defender.currentHP - attackerDamage;
+                attackerDamage = _randomNumber.Next(2);
+                defender._currentHp = defender._currentHp - attackerDamage;
             }
 
             if (Hero)
             {
                 action = "PUNCH";
                 attackerDamage = 1;
-                defender.currentHP = defender.currentHP - attackerDamage;
+                defender._currentHp = defender._currentHp - attackerDamage;
             }
         }
-        Console.WriteLine($"{attackerName} used {action} on {defender.name}.");
-        Console.WriteLine($"{action} dealt {attackerDamage} damage to {defender.name}");
-        Console.WriteLine($"{defender.name} is now {defender.currentHP}/{defender.maxHP}");
+        Console.WriteLine($"{attackerName} used {action} on {defender._name}.");
+        Console.WriteLine($"{action} dealt {attackerDamage} damage to {defender._name}");
+        Console.WriteLine($"{defender._name} is now {defender._currentHp}/{defender.MaxHp}");
+    }
+
+    public int Health => _currentHp;
+    public string Name => _name;
+    
+    private enum Action
+    {
+        Nothing,
+        Attack
     }
 }

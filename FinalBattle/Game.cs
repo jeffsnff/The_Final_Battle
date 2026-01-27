@@ -2,56 +2,29 @@ namespace FinalBattle;
 
 public class Game
 {
-    private static bool status;
-    public Game()
-    {
-        status = true;
-    }
+    private bool _status = true;
+    public Game() { }
     
     public void Run()
     {
-        List<Character> heros = new List<Character>();
+        List<Character> heroes = new List<Character>();
         List<Character> enemies = new List<Character>();
 
-        heros.Add(PickHero());
+        heroes.Add(PickHero());
         enemies.Add(new Character());
-        while (status)
+        while (_status)
         {
-            Turn(heros, enemies);
-            Turn(enemies, heros);
+            Battle battle = new Battle();
+            _status = battle.Turn(heroes, enemies, _status);
+            _status = battle.Turn(enemies, heroes, _status);
         }
     }
     
     /// <summary>
-    /// Pass in party to represent the parties move
-    /// </summary>
-    /// <param name="party"></param>
-    private static void Turn(List<Character> offense, List<Character> defense)
-    {
-        foreach (Character member in offense)
-        {
-            Console.WriteLine(($"It is {member.name}'s turn..."));
-            member.Move(defense.First());
-            Console.WriteLine();
-            
-            if (defense.First().currentHP <= 0)
-            {
-                defense.Remove(defense.First());
-            }
-
-            if (defense.Count == 0)
-            {
-                Console.WriteLine("Game Over!");
-                status = false;
-            }
-            Console.ReadKey();
-        } 
-    }
-    /// <summary>
     /// Allows player to name their hero
     /// </summary>
     /// <returns></returns>
-    private static Character PickHero()
+    private Character PickHero()
     {
         while (true)
         {
