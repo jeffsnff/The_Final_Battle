@@ -2,9 +2,7 @@ namespace FinalBattle;
 
 public class Battle
 {
-    public Battle(){  }
-    
-    public bool Turn(List<Character> offense, List<Character> defense, bool status)
+    public static bool Turn(List<Character> offense, List<Character> defense, bool status)
     {
         foreach (Character member in offense)
         {

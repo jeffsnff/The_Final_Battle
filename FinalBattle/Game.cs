@@ -14,9 +14,8 @@ public class Game
         enemies.Add(new Character());
         while (_status)
         {
-            Battle battle = new Battle();
-            _status = battle.Turn(heroes, enemies, _status);
-            _status = battle.Turn(enemies, heroes, _status);
+            _status = Battle.Turn(heroes, enemies, _status);
+            _status = Battle.Turn(enemies, heroes, _status);
         }
     }
     
