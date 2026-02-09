@@ -13,9 +13,9 @@ Implemented by following examples and exercises from the C# Player's Guide.
   - [X] Attacks
   - [X] Damage and HP
   - [X] Death
-  - [ ] Battle Series
-  - [ ] The Uncoded One
-  - [ ] The Player Decides
+  - [X] Battle Series
+  - [X] The Uncoded One
+  - [X] The Player Decides
 - Expansions
   - [ ] The Game's Status
   - [ ] Items

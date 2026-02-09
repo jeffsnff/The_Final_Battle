@@ -10,9 +10,10 @@ public class Game
     public void Run()
     {
         List<Character> heroes = new List<Character>();
-        List<Character> enemyWave1 = new List<Character>();
-        List<Character> enemyWave2 = new List<Character>();
-        List<List<Character>> enemieWaves= new List<List<Character>>();
+        List<Character> enemyWaveOne = new List<Character>();
+        List<Character> enemyWaveTwo = new List<Character>();
+        List<Character> bossBattle = new List<Character>();
+        List<List<Character>> enemies = new List<List<Character>>();
         
         // _gameMode = SelectGameMode();
         switch (_gameMode = 3) // Jeffrey remove this number uncomment SelectGameMode() to select manually
@@ -20,31 +21,33 @@ public class Game
             case 1: // Player vs Computer
                 heroes.Add(PickHero());
                 
-                enemyWave1.Add(new Skeleton());
-                enemyWave2.Add(new Skeleton());
-                enemyWave2.Add(new Skeleton());
-                enemieWaves.Add(enemyWave1);
-                enemieWaves.Add(enemyWave2);
+                enemyWaveOne.Add(new Skeleton());
+                enemyWaveTwo.Add(new Skeleton());
+                enemyWaveTwo.Add(new Skeleton());
+                enemies.Add(enemyWaveOne);
+                enemies.Add(enemyWaveTwo);
                 break;
             case 2: // Player vs Player
                 heroes.Add(PickHero());
-                enemyWave1.Add(new Skeleton(false));
+                enemyWaveOne.Add(new Skeleton(false));
                 break;
             case 3: // Computer vs Computer
                 heroes.Add(PickHero());
                 
-                enemyWave1.Add(new Skeleton());
-                enemyWave2.Add(new Skeleton());
-                enemyWave2.Add(new Skeleton());
-                enemieWaves.Add(enemyWave1);
-                enemieWaves.Add(enemyWave2);
+                enemyWaveOne.Add(new Skeleton());
+                enemyWaveTwo.Add(new Skeleton());
+                enemyWaveTwo.Add(new Skeleton());
+                bossBattle.Add(new UnCodedOne());
+                enemies.Add(enemyWaveOne);
+                enemies.Add(enemyWaveTwo);
+                enemies.Add(bossBattle);
                 break;
         }
         
         // Game Loop
-        while (enemieWaves.Count > 0)
+        while (enemies.Count > 0)
         {
-            foreach (List<Character> wave in enemieWaves)
+            foreach (List<Character> wave in enemies)
             {
                 while (wave.Count > 0)
                 {
