@@ -45,14 +45,14 @@ public class Game
         }
         
         // Game Loop
-        while (enemies.Count > 0)
+        while (enemies.Count > 0 && heroes.Count > 0)
         {
             foreach (List<Character> wave in enemies)
             {
                 while (wave.Count > 0)
                 {
                     Battle.Turn(heroes, wave);
-                    if (wave.Count == 0)
+                    if (wave.Count == 0 || heroes.Count == 0)
                     {
                         break;
                     }
