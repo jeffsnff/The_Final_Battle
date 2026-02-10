@@ -4,87 +4,87 @@ namespace FinalBattle;
 
 public class Character
 {
-    private readonly string _name;
-    public bool Ai { get; }
-    private int MaxHp { get; }
-    private int _currentHp;
-    public Action CurrentAttack { get; set; }
-    
-    protected Character(string name, int maxHp, bool computerControlled)
-    {
-        _name = name;
-        Ai = computerControlled;
-        MaxHp = maxHp;
-        _currentHp = MaxHp;
-    }
-    public void Move(Character attacker, Character defender)
-    {
-        Random randomNumber = new Random();
-        
-        if (attacker.Ai)
-        {
-            // Generates a random number based off the number of moves in _Action
-            // then selects that action that cooresponds to the number.
-            attacker.CurrentAttack = (Action)randomNumber.Next(Enum.GetNames<Action>().Length);
-        }
-        else
-        {
-            string[] actions = Enum.GetNames<Action>();
-            while (true)
-            {
-                Console.WriteLine("What would you like to do?");
-                for (int i = 0; i < actions.Length; i++)
-                {
-                    Console.WriteLine($"{i} - {actions[i]}");
-                }
+  private readonly string _name;
+  public bool Ai { get; }
+  private int MaxHp { get; }
+  private int _currentHp;
+  public Action CurrentAttack { get; set; }
 
-                if (int.TryParse(Console.ReadLine(), out int index))
-                {
-                    if (!(index > actions.Length - 1))
-                    {
-                        attacker.CurrentAttack = Enum.GetValues<Action>().ElementAt(index);
-                        break;
-                    }
-                }
-                Console.WriteLine("That is not an option!");
-                Console.ReadKey();
-            }
-        }
-        
-        switch (attacker.CurrentAttack)
+  protected Character(string name, int maxHp, bool computerControlled)
+  {
+    _name = name;
+    Ai = computerControlled;
+    MaxHp = maxHp;
+    _currentHp = MaxHp;
+  }
+  public void Move(Character attacker, Character defender)
+  {
+    Random randomNumber = new Random();
+
+    if (attacker.Ai)
+    {
+      // Generates a random number based off the number of moves in _Action
+      // then selects that action that cooresponds to the number.
+      attacker.CurrentAttack = (Action)randomNumber.Next(Enum.GetNames<Action>().Length);
+    }
+    else
+    {
+      string[] actions = Enum.GetNames<Action>();
+      while (true)
+      {
+        Console.WriteLine("What would you like to do?");
+        for (int i = 0; i < actions.Length; i++)
         {
-            case Action.Nothing:
-                Console.WriteLine($"{attacker.Name} did NOTHING.");
-                break;
-            case Action.Attack:
-                PerformAction(attacker, defender);
-                break;
-            default:
-                Console.WriteLine($"{attacker.Name} did NOTHING.");
-                break;
+          Console.WriteLine($"{i} - {actions[i]}");
         }
+
+        if (int.TryParse(Console.ReadLine(), out int index))
+        {
+          if (!(index > actions.Length - 1))
+          {
+            attacker.CurrentAttack = Enum.GetValues<Action>().ElementAt(index);
+            break;
+          }
+        }
+        Console.WriteLine("That is not an option!");
+        Console.ReadKey();
+      }
     }
 
-    /// <summary>
-    /// Displays the character name and action
-    /// </summary>
-    /// <param name="attacker"></param>
-    /// <param name="defender"></param>
-    public virtual void PerformAction(Character attacker, Character defender)
+    switch (attacker.CurrentAttack)
     {
-        
+      case Action.Nothing:
+        Console.WriteLine($"{attacker.Name} did NOTHING.");
+        break;
+      case Action.Attack:
+        PerformAction(attacker, defender);
+        break;
+      default:
+        Console.WriteLine($"{attacker.Name} did NOTHING.");
+        break;
     }
-    public int Health
-    {
-        get => _currentHp;
-        set => _currentHp = value;
-    }
-    public int MaxHP => MaxHp;
-    public virtual string Name => _name;
-    
-    public enum Action
-    {
-        Nothing,
-        Attack
-    }
+  }
+
+  /// <summary>
+  /// Displays the character name and action
+  /// </summary>
+  /// <param name="attacker"></param>
+  /// <param name="defender"></param>
+  public virtual void PerformAction(Character attacker, Character defender)
+  {
+
+  }
+  public int Health
+  {
+    get => _currentHp;
+    set => _currentHp = value;
+  }
+  public int MaxHP => MaxHp;
+  public virtual string Name => _name;
+
+  public enum Action
+  {
+    Nothing,
+    Attack
+  }
 }
