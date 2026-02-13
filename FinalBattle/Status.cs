@@ -18,8 +18,9 @@ public static class Status
       border = border + symbol;
       if (border.Length == (_width / 2))
       {
-        border = border.Remove((border.Length - title.Length));
+        // border = border.Remove((border.Length - title.Length));
         border = border + title;
+        i = i + title.Length;
       }
     }
     Console.WriteLine($"\n{border}\n");
@@ -35,7 +36,9 @@ public static class Status
     CreateBorder("-", " VS ");
     foreach (Character member in Enemies)
     {
-      Console.WriteLine($"{member.Name} ({member.Health}/{member.MaxHP})");
+      string text = $"{member.Name} ({member.Health}/{member.MaxHP})";
+      Console.CursorLeft = Console.BufferWidth - (text.Length);
+      Console.WriteLine(text);
     }
     CreateBorder("=");
   }
