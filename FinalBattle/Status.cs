@@ -9,41 +9,30 @@ public static class Status
   public static List<Character> Heros { get; set; }
   public static List<Character> Enemies { get; set; }
 
-  private static void CreateBorder(string symbol)
+  private static void CreateBorder(string symbol, string word = "")
   {
     string border = "";
+    string title = word;
     for (int i = 1; i < _width; i++)
     {
       border = border + symbol;
-    }
-    Console.WriteLine(border);
-  }
-
-  private static void TopBorder()
-  {
-    string border = "";
-    string title = " BATTLE ";
-    for (int i = 1; i < _width; i++)
-    {
-      border = border + "=";
       if (border.Length == (_width / 2))
       {
         border = border.Remove((border.Length - title.Length));
         border = border + title;
-        // i = i + title.Length;
       }
     }
-    Console.WriteLine(border);
+    Console.WriteLine($"\n{border}\n");
   }
 
   public static void BattleStatus()
   {
-    TopBorder();
+    CreateBorder("=", " BATTLE ");
     foreach (Character member in Heros)
     {
       Console.WriteLine($"{member.Name} ({member.Health}/{member.MaxHP})");
     }
-    Console.WriteLine();
+    CreateBorder("-", " VS ");
     foreach (Character member in Enemies)
     {
       Console.WriteLine($"{member.Name} ({member.Health}/{member.MaxHP})");
