@@ -3,17 +3,11 @@ using System.Reflection.PortableExecutable;
 
 namespace FinalBattle;
 
-public class Status
+public static class Status
 {
   private static int _width = Console.WindowWidth;
-  private static List<Character> Heros { get; set; }
-  private static List<Character> Enemies { get; set; }
-
-  public Status(List<Character> heros, List<Character> enemies)
-  {
-    Heros = heros;
-    Enemies = enemies;
-  }
+  public static List<Character> Heros { get; set; }
+  public static List<Character> Enemies { get; set; }
 
   private static void CreateBorder(string symbol)
   {
@@ -34,15 +28,15 @@ public class Status
       border = border + "=";
       if (border.Length == (_width / 2))
       {
-        border.Remove((border.Length-title.Length));
+        border = border.Remove((border.Length - title.Length));
         border = border + title;
-        i = i + title.Length;
+        // i = i + title.Length;
       }
     }
     Console.WriteLine(border);
   }
 
-  public void BattleStatus()
+  public static void BattleStatus()
   {
     TopBorder();
     foreach (Character member in Heros)
