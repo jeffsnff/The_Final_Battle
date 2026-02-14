@@ -8,6 +8,7 @@ public static class Status
   private static int _width = Console.WindowWidth;
   public static List<Character> Heros { get; set; }
   public static List<Character> Enemies { get; set; }
+  public static Character currentPlayer { get; set; }
 
   private static void CreateBorder(string symbol, string word = "")
   {
@@ -31,14 +32,35 @@ public static class Status
     CreateBorder("=", " BATTLE ");
     foreach (Character member in Heros)
     {
-      Console.WriteLine($"{member.Name} ({member.Health}/{member.MaxHP})");
+      if(member == currentPlayer)
+      {
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine($"{member.Name} ({member.Health}/{member.MaxHP})");
+        Console.ResetColor();
+      }
+      else
+      {
+        Console.WriteLine($"{member.Name} ({member.Health}/{member.MaxHP})");
+      }
+      
     }
     CreateBorder("-", " VS ");
     foreach (Character member in Enemies)
     {
       string text = $"{member.Name} ({member.Health}/{member.MaxHP})";
-      Console.CursorLeft = Console.BufferWidth - (text.Length);
-      Console.WriteLine(text);
+      if(member == currentPlayer)
+      {
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.CursorLeft = Console.BufferWidth - (text.Length);
+        Console.WriteLine(text);
+        Console.ResetColor();
+      }
+      else
+      {
+        Console.CursorLeft = Console.BufferWidth - (text.Length);
+        Console.WriteLine(text);
+      }
+      
     }
     CreateBorder("=");
   }
