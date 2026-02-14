@@ -6,7 +6,9 @@ public class Battle
   {
     foreach (Character member in offense)
     {
-      Console.WriteLine(($"It is {member.Name}'s turn..."));
+      Status.currentPlayer = member;
+      Status.BattleStatus();
+      Console.WriteLine($"It is {member.Name}'s turn...");
 
       if (member.Ai)
       {
@@ -18,6 +20,7 @@ public class Battle
       }
       Console.WriteLine();
       Death(defense);
+      Console.Clear();
     }
     // return GameStatus(defense);
   }
