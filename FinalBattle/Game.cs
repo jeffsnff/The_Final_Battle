@@ -49,6 +49,8 @@ public class Game
     {
       foreach (List<Character> wave in enemies)
       {
+        Status.Enemies = wave;
+        Status.Heros = heroes;
         while (wave.Count > 0)
         {
           Battle.Turn(heroes, wave);
