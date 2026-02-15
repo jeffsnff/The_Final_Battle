@@ -5,7 +5,7 @@ namespace FinalBattle;
 
 public static class Status
 {
-  private static int _width = Console.WindowWidth;
+  private static readonly int Width = Console.WindowWidth;
   public static List<Character> Heros { get; set; }
   public static List<Character> Enemies { get; set; }
   public static Character currentPlayer { get; set; }
@@ -14,10 +14,10 @@ public static class Status
   {
     string border = "";
     string title = word;
-    for (int i = 1; i < _width; i++)
+    for (int i = 1; i < Width; i++)
     {
       border = border + symbol;
-      if (border.Length == (_width / 2))
+      if (border.Length == (Width / 2))
       {
         // border = border.Remove((border.Length - title.Length));
         border = border + title;
@@ -48,16 +48,15 @@ public static class Status
     foreach (Character member in Enemies)
     {
       string text = $"{member.Name} ({member.Health}/{member.MaxHP})";
+      Console.CursorLeft = Width - (text.Length) - 1;
       if(member == currentPlayer)
       {
         Console.ForegroundColor = ConsoleColor.Green;
-        Console.CursorLeft = Console.BufferWidth - (text.Length);
         Console.WriteLine(text);
         Console.ResetColor();
       }
       else
       {
-        Console.CursorLeft = Console.BufferWidth - (text.Length);
         Console.WriteLine(text);
       }
       
