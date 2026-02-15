@@ -4,6 +4,10 @@ class Program
 {
   static void Main(string[] args)
   {
+    /* TO DO: 
+     * Jeffrey, you need to check everything in an external console later
+     */
+    Console.SetWindowSize(100,100);
 
     // Console.WriteLine("Choose how you want to play the game:");
     // Console.WriteLine("1: Player vs Computer");
