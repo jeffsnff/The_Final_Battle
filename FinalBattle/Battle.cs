@@ -22,7 +22,6 @@ public class Battle
       Death(defense);
       Console.Clear();
     }
-    // return GameStatus(defense);
   }
 
   private static Character Enemy_Chooser(List<Character> enemies)
