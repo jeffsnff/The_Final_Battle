@@ -17,7 +17,7 @@ Implemented by following examples and exercises from the C# Player's Guide.
   - [X] The Uncoded One
   - [X] The Player Decides
 - Expansions
-  - [ ] The Game's Status
+  - [X] The Game's Status
   - [ ] Items
   - [ ] Gear
   - [ ] Stolen Inventory
