@@ -63,6 +63,7 @@ public class Character
         Console.WriteLine($"{attacker.Name} did NOTHING.");
         break;
     }
+    Thread.Sleep(5000);
   }
 
   /// <summary>
