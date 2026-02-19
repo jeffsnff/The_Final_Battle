@@ -2,13 +2,13 @@ namespace FinalBattle;
 
 public class Skeleton(bool computerControlled = true) : Character("SKELETON", 5, computerControlled)
 {
-  public override void PerformAction(Character attacker, Character defender)
+  public override void PerformAction(Action attack, Character defender)
   {
     Random randomNumber = new Random();
-    string? attackerName = attacker.ToString();
+    string? attackerName = ToString();
     string action = nameof(Action.Nothing).ToUpper();
     int attackDamage = 0;
-    if (attacker.CurrentAttack == Action.Attack)
+    if (CurrentAttack == Action.Attack)
     {
       action = "BONE CRUNCH";
       attackDamage = randomNumber.Next(2);
