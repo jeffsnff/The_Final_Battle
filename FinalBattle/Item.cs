@@ -2,5 +2,10 @@ namespace FinalBattle;
 
 public class Item
 {
-  private string name;
+  private string _name;
+
+  public Item(string name)
+  {
+    _name = name;
+  }
 }
