@@ -59,6 +59,9 @@ public class Character
       case Action.Attack:
         PerformAction(CurrentAttack, defender);
         break;
+      case Action.Inventory:
+        Console.WriteLine("Inventory Screen!");
+        break;
     }
     Thread.Sleep(3000);
   }
@@ -83,6 +86,7 @@ public class Character
   public enum Action
   {
     Nothing,
+    Inventory,
     Attack
   }
 }
