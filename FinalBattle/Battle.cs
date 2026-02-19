@@ -9,23 +9,22 @@ public class Battle
       Status.currentPlayer = member;
       Status.BattleStatus();
       Console.WriteLine($"It is {member.Name}'s turn...");
-
-      if (member.Ai)
-      {
-        member.Move(member, defense.First());
-      }
-      else
-      {
-        member.Move(member, Enemy_Chooser(defense));
-      }
+      member.Move(member, Enemy_Chooser(defense, member));
       Console.WriteLine();
       Death(defense);
-      Console.Clear();
+      // Console.Clear();
     }
   }
 
-  private static Character Enemy_Chooser(List<Character> enemies)
+  private static Character Enemy_Chooser(List<Character> enemies, Character member)
   {
+    if (member.Ai)
+    {
+      Random random = new Random();
+      int index = random.Next(enemies.Count);
+      return enemies[index];
+
+    }
     // Console.WriteLine("What enemy would you like to attack?");
     for (int i = 0; i < enemies.Count; i++)
     {
