@@ -18,19 +18,19 @@ public class Battle
 
   private static Character Enemy_Chooser(List<Character> enemies, Character member)
   {
+    
     if (member.Ai)
     {
       Random random = new Random();
       int index = random.Next(enemies.Count);
       return enemies[index];
-
     }
-    // Console.WriteLine("What enemy would you like to attack?");
+    
     for (int i = 0; i < enemies.Count; i++)
     {
       Console.WriteLine($"{i} : {enemies[i].Name}");
     }
-
+    
     Console.Write("Enemy to attack (Input a number): ");
     if (int.TryParse(Console.ReadLine(), out int enemyNumber))
     {
