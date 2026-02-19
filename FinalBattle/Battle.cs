@@ -2,10 +2,30 @@ namespace FinalBattle;
 
 public class Battle
 {
+  private Party _heros;
+  private Party _enemies;
   private static Character _attacker;
   private static Character _defender;
   private static Character.Action currentAttack;
-  public static void Turn(List<Character> offense, List<Character> defense)
+
+  public Battle(Party heros, Party enemies)
+  {
+    _heros = heros;
+    _enemies = enemies;
+  }
+
+  public void ExecuteBattle()
+  {
+    Status.Enemies = _enemies.Members;
+    Status.Heros = _heros.Members;
+    Turn(_heros.Members, _enemies.Members);
+    if (_enemies.Count <= 0)
+    {
+      return;
+    }
+    Turn(_enemies.Members, _heros.Members);
+  }
+  private void Turn(List<Character> offense, List<Character> defense)
   {
     foreach (Character member in offense)
     {

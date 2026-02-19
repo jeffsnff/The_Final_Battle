@@ -50,16 +50,14 @@ public class Game
     {
       foreach (Party wave in enemies)
       {
-        Status.Enemies = wave.Members;
-        Status.Heros = heros.Members;
+        Battle battle = new Battle(heros, wave);
         while (wave.Count > 0)
         {
-          Battle.Turn(heros.Members, wave.Members);
+          battle.ExecuteBattle();
           if (wave.Count == 0 || heros.Count == 0)
           {
             break;
           }
-          Battle.Turn(wave.Members, heros.Members);
         }
       }
 
