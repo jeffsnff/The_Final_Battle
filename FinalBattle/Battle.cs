@@ -2,20 +2,34 @@ namespace FinalBattle;
 
 public class Battle
 {
+  private static Character _attacker;
+  private static Character _defender;
+  private static Character.Action currentAttack;
   public static void Turn(List<Character> offense, List<Character> defense)
   {
     foreach (Character member in offense)
     {
-      Status.currentPlayer = member;
+      _attacker = member;
+      Status.currentPlayer = _attacker;
       Status.BattleStatus();
       Console.WriteLine($"It is {member.Name}'s turn...");
-      member.Move(member, Enemy_Chooser(defense, member));
+      currentAttack = member.ChooseMove();
+      
+      if (currentAttack.Equals(Character.Action.Attack))
+      {
+        _defender = Enemy_Chooser(defense, member);
+        member.Move(_defender);
+      }
+      else
+      {
+        member.Move();
+      }
+      
       Console.WriteLine();
       Death(defense);
       // Console.Clear();
     }
   }
-
   private static Character Enemy_Chooser(List<Character> enemies, Character member)
   {
     
@@ -43,7 +57,6 @@ public class Battle
     }
     return enemies[0];
   }
-
   private static bool GameStatus(List<Character> defense)
   {
     if (defense.Count == 0)

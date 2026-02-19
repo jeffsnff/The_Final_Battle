@@ -17,53 +17,50 @@ public class Character
     MaxHp = maxHp;
     _currentHp = MaxHp;
   }
-  public void Move(Character attacker, Character defender)
+
+  public Action ChooseMove()
   {
     Random randomNumber = new Random();
 
-    if (attacker.Ai)
+    if (Ai)
     {
       // Generates a random number based off the number of moves in _Action
       // then selects that action that cooresponds to the number.
-      attacker.CurrentAttack = (Action)randomNumber.Next(Enum.GetNames<Action>().Length);
+      return CurrentAttack = (Action)randomNumber.Next(Enum.GetNames<Action>().Length);
     }
-    else
+    string[] actions = Enum.GetNames<Action>();
+    while (true)
     {
-      string[] actions = Enum.GetNames<Action>();
-      while (true)
+      Console.WriteLine("What would you like to do?");
+      for (int i = 0; i < actions.Length; i++)
       {
-        Console.WriteLine("What would you like to do?");
-        for (int i = 0; i < actions.Length; i++)
-        {
-          Console.WriteLine($"{i} - {actions[i]}");
-        }
-
-        if (int.TryParse(Console.ReadLine(), out int index))
-        {
-          if (!(index > actions.Length - 1))
-          {
-            attacker.CurrentAttack = Enum.GetValues<Action>().ElementAt(index);
-            break;
-          }
-        }
-        Console.WriteLine("That is not an option!");
-        Console.ReadKey();
+        Console.WriteLine($"{i} - {actions[i]}");
       }
-    }
 
-    switch (attacker.CurrentAttack)
+      if (int.TryParse(Console.ReadLine(), out int index))
+      {
+        if (!(index > actions.Length))
+        {
+          return CurrentAttack = Enum.GetValues<Action>().ElementAt(index);
+          break;
+        }
+      }
+      Console.WriteLine("That is not an option!");
+      Console.ReadKey();
+    }
+  }
+  public void Move(Character defender = null)
+  {
+    switch (CurrentAttack)
     {
       case Action.Nothing:
-        Console.WriteLine($"{attacker.Name} did NOTHING.");
+        Console.WriteLine($"{Name} did NOTHING.");
         break;
       case Action.Attack:
-        PerformAction(attacker, defender);
-        break;
-      default:
-        Console.WriteLine($"{attacker.Name} did NOTHING.");
+        PerformAction(CurrentAttack, defender);
         break;
     }
-    Thread.Sleep(5000);
+    Thread.Sleep(3000);
   }
 
   /// <summary>
@@ -71,7 +68,7 @@ public class Character
   /// </summary>
   /// <param name="attacker"></param>
   /// <param name="defender"></param>
-  public virtual void PerformAction(Character attacker, Character defender)
+  public virtual void PerformAction(Action attack, Character defender)
   {
 
   }
