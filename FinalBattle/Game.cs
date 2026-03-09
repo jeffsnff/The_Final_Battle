@@ -9,35 +9,36 @@ public class Game
 
   public void Run()
   {
-    List<Character> heroes = new List<Character>();
-    List<Character> enemyWaveOne = new List<Character>();
-    List<Character> enemyWaveTwo = new List<Character>();
-    List<Character> bossBattle = new List<Character>();
-    List<List<Character>> enemies = new List<List<Character>>();
+    Party heros = new Party();
+    Party enemyWaveOne = new Party();
+    Party enemyWaveTwo = new Party();
+    Party bossBattle = new Party();
+    List<Party> enemies = new List<Party>();
 
     // _gameMode = SelectGameMode();
     switch (_gameMode = 3) // Jeffrey remove this number uncomment SelectGameMode() to select manually
     {
       case 1: // Player vs Computer
-        heroes.Add(PickHero());
-
-        enemyWaveOne.Add(new Skeleton());
-        enemyWaveTwo.Add(new Skeleton());
-        enemyWaveTwo.Add(new Skeleton());
+        heros.Add = PickHero();
+        
+        enemyWaveOne.Add = new Skeleton();
+        enemyWaveTwo.Add = new Skeleton();
+        enemyWaveTwo.Add = new Skeleton();
         enemies.Add(enemyWaveOne);
         enemies.Add(enemyWaveTwo);
         break;
       case 2: // Player vs Player
-        heroes.Add(PickHero());
-        enemyWaveOne.Add(new Skeleton(false));
+        heros.Add = PickHero();
+
+        enemyWaveOne.Add = new Skeleton();
         break;
       case 3: // Computer vs Computer
-        heroes.Add(PickHero());
+        heros.Add = PickHero();
 
-        enemyWaveOne.Add(new Skeleton());
-        enemyWaveTwo.Add(new Skeleton());
-        enemyWaveTwo.Add(new Skeleton());
-        bossBattle.Add(new UnCodedOne());
+        enemyWaveOne.Add = new Skeleton();
+        enemyWaveTwo.Add = new Skeleton();
+        enemyWaveTwo.Add = new Skeleton();
+        bossBattle.Add = new UnCodedOne();
         enemies.Add(enemyWaveOne);
         enemies.Add(enemyWaveTwo);
         enemies.Add(bossBattle);
@@ -45,20 +46,18 @@ public class Game
     }
 
     // Game Loop
-    while (enemies.Count > 0 && heroes.Count > 0)
+    while (enemies.Count > 0 && heros.Count > 0)
     {
-      foreach (List<Character> wave in enemies)
+      foreach (Party wave in enemies)
       {
-        Status.Enemies = wave;
-        Status.Heros = heroes;
+        Battle battle = new Battle(heros, wave);
         while (wave.Count > 0)
         {
-          Battle.Turn(heroes, wave);
-          if (wave.Count == 0 || heroes.Count == 0)
+          if (wave.Count == 0 || heros.Count == 0)
           {
             break;
           }
-          Battle.Turn(wave, heroes);
+          battle.ExecuteBattle();
         }
       }
 
