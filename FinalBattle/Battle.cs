@@ -35,14 +35,14 @@ public class Battle
       Console.WriteLine($"It is {member.Name}'s turn...");
       currentAttack = member.ChooseMove();
       
-      if (currentAttack.Equals(Character.Action.Attack))
+      if (_attacker.CurrentAttack.Equals(Character.Action.Attack))
       {
         _defender = Enemy_Chooser(defense, member);
-        member.Move(_defender);
+        member.PerformAction(_attacker.CurrentAttack, _defender);
       }
       else
       {
-        member.Move();
+        member.PerformAction(_attacker.CurrentAttack);
       }
       
       Console.WriteLine();

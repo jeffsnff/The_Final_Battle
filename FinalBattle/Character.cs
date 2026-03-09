@@ -5,6 +5,8 @@ namespace FinalBattle;
 public class Character
 {
   private readonly string _name;
+  private string _attackAction { get; }
+  private int _attackDamage { get; }
   public bool Ai { get; }
   private int MaxHp { get; }
   private int _currentHp;
@@ -20,7 +22,7 @@ public class Character
     _attackDamage = attackDamage;
   }
 
-  public Action ChooseMove()
+  public void ChooseMove()
   {
     Random randomNumber = new Random();
 
@@ -28,7 +30,8 @@ public class Character
     {
       // Generates a random number based off the number of moves in _Action
       // then selects that action that cooresponds to the number.
-      return CurrentAttack = (Action)randomNumber.Next(Enum.GetNames<Action>().Length);
+      CurrentAttack = (Action)randomNumber.Next(Enum.GetNames<Action>().Length);
+      return;
     }
     string[] actions = Enum.GetNames<Action>();
     while (true)
@@ -43,29 +46,13 @@ public class Character
       {
         if (!(index > actions.Length))
         {
-          return CurrentAttack = Enum.GetValues<Action>().ElementAt(index);
+          CurrentAttack = Enum.GetValues<Action>().ElementAt(index);
           break;
         }
       }
       Console.WriteLine("That is not an option!");
       Console.ReadKey();
     }
-  }
-  public void Move(Character defender = null)
-  {
-    switch (CurrentAttack)
-    {
-      case Action.Nothing:
-        Console.WriteLine($"{Name} did NOTHING.");
-        break;
-      case Action.Attack:
-        PerformAction(CurrentAttack, defender);
-        break;
-      case Action.Inventory:
-        Console.WriteLine("Inventory Screen!");
-        break;
-    }
-    Thread.Sleep(3000);
   }
 
   /// <summary>
