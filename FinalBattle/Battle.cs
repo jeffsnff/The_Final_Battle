@@ -6,7 +6,6 @@ public class Battle
   private Party _enemies;
   private static Character _attacker;
   private static Character _defender;
-  private static Character.Action currentAttack;
 
   public Battle(Party heros, Party enemies)
   {
