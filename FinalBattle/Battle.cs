@@ -34,17 +34,33 @@ public class Battle
       Status.BattleStatus();
       Console.WriteLine($"It is {member.Name}'s turn...");
       member.ChooseMove();
-      
-      if (_attacker.CurrentAttack.Equals(Character.Action.Attack))
+
+      switch (_attacker.CurrentAttack)
       {
-        _defender = Enemy_Chooser(defense, member);
-        member.PerformAction(_attacker.CurrentAttack, _defender);
+        case Character.Action.Attack:
+          _defender = Enemy_Chooser(defense, member);
+          member.PerformAction(_attacker.CurrentAttack, _defender);
+          break;
+        case Character.Action.Nothing:
+          Console.WriteLine($"{_attacker} did NOTHING.");
+          break;
+        case Character.Action.Inventory:
+          Console.WriteLine($"{_attacker} checks backpack.");
+          if (inventory.Count==0)
+          {
+            Console.WriteLine("Backpack is empty!");
+            break;
+          }
+          foreach (Item item in inventory)
+          {
+            Console.WriteLine(item);
+          }
+          Console.WriteLine("What would you like to take?");
+          Console.ReadKey();
+          break;
       }
-      else
-      {
-        member.PerformAction(_attacker.CurrentAttack);
-      }
-      Thread.Sleep(3000);
+
+      // Thread.Sleep(3000);
       Console.WriteLine();
       DeathMechanic(defense);
       // Console.Clear();

@@ -71,14 +71,6 @@ public class Character
       string playerUpdate = defender.Health == 0 ? $"{defender} has died!" : $"{defender} is now {defender.Health}/{defender.MaxHP}";
       Console.WriteLine(playerUpdate);
     }
-    if (attack == Action.Nothing)
-    {
-      Console.WriteLine($"{Name} did {Enum.GetName(Action.Nothing).ToUpper()}.");
-    }
-    if (attack == Action.Inventory)
-    {
-      
-    }
   }
   public int Health
   {
