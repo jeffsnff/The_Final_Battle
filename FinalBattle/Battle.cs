@@ -51,16 +51,34 @@ public class Battle
             Console.WriteLine("Backpack is empty!");
             break;
           }
-          foreach (Item item in inventory)
+
+          for (int i = 0; i < inventory.Count; i++)
           {
-            Console.WriteLine(item);
+            Console.WriteLine($"{i} - {inventory[i]}");
           }
-          Console.WriteLine("What would you like to take?");
-          Console.ReadKey();
+          Console.WriteLine("What would you like to take? (enter number)");
+          if (int.TryParse(Console.ReadLine(), out int userSelection))
+          {
+            if (inventory[userSelection].ToString() == "Health Potion")
+            {
+              HealthPotion potion = (HealthPotion)inventory[userSelection];
+              Console.WriteLine("You take the health potion!");
+              int temp = _attacker.Health + potion.Take();
+              if (temp > _attacker.MaxHP)
+              {
+                _attacker.Health = _attacker.MaxHP;
+              }
+              else
+              {
+                _attacker.Health += potion.Take();
+              }
+              inventory.Remove(inventory[userSelection]);
+            }
+          }
           break;
       }
 
-      // Thread.Sleep(3000);
+      Thread.Sleep(3000);
       Console.WriteLine();
       DeathMechanic(defense);
       // Console.Clear();
