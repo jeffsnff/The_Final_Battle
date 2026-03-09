@@ -44,7 +44,7 @@ public class Battle
       {
         member.PerformAction(_attacker.CurrentAttack);
       }
-      
+      Thread.Sleep(3000);
       Console.WriteLine();
       DeathMechanic(defense);
       // Console.Clear();
