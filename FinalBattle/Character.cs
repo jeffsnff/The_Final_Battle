@@ -10,12 +10,14 @@ public class Character
   private int _currentHp;
   public Action CurrentAttack { get; set; }
 
-  protected Character(string name, int maxHp, bool computerControlled)
+  protected Character(string name, int maxHp, bool computerControlled, string attackAction, int attackDamage)
   {
     _name = name;
     Ai = computerControlled;
     MaxHp = maxHp;
     _currentHp = MaxHp;
+    _attackAction = attackAction;
+    _attackDamage = attackDamage;
   }
 
   public Action ChooseMove()
@@ -71,9 +73,25 @@ public class Character
   /// </summary>
   /// <param name="attacker"></param>
   /// <param name="defender"></param>
-  public virtual void PerformAction(Action attack, Character defender)
+  public void PerformAction(Action attack, Character defender = null)
   {
-
+    if (attack == Action.Attack)
+    {
+      defender.Health = (defender.Health - _attackDamage);
+      
+      Console.WriteLine($"{Name} used {_attackAction} on {defender}.");
+      Console.WriteLine($"{_attackAction} dealt {_attackDamage} damage to {defender}");
+      string playerUpdate = defender.Health == 0 ? $"{defender} has died!" : $"{defender} is now {defender.Health}/{defender.MaxHP}";
+      Console.WriteLine(playerUpdate);
+    }
+    if (attack == Action.Nothing)
+    {
+      Console.WriteLine($"{Name} did {Enum.GetName(Action.Nothing).ToUpper()}.");
+    }
+    if (attack == Action.Inventory)
+    {
+      
+    }
   }
   public int Health
   {
