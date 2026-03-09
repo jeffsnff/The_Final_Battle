@@ -33,7 +33,7 @@ public class Battle
       Status.currentPlayer = _attacker;
       Status.BattleStatus();
       Console.WriteLine($"It is {member.Name}'s turn...");
-      currentAttack = member.ChooseMove();
+      member.ChooseMove();
       
       if (_attacker.CurrentAttack.Equals(Character.Action.Attack))
       {
