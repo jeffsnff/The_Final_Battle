@@ -53,11 +53,11 @@ public class Game
         Battle battle = new Battle(heros, wave);
         while (wave.Count > 0)
         {
-          battle.ExecuteBattle();
           if (wave.Count == 0 || heros.Count == 0)
           {
             break;
           }
+          battle.ExecuteBattle();
         }
       }
 
