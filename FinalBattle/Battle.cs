@@ -46,35 +46,7 @@ public class Battle
           break;
         case Character.Action.Inventory:
           Console.WriteLine($"{_attacker} checks backpack.");
-          if (inventory.Count==0)
-          {
-            Console.WriteLine("Backpack is empty!");
-            break;
-          }
-
-          for (int i = 0; i < inventory.Count; i++)
-          {
-            Console.WriteLine($"{i} - {inventory[i]}");
-          }
-          Console.WriteLine("What would you like to take? (enter number)");
-          if (int.TryParse(Console.ReadLine(), out int userSelection))
-          {
-            if (inventory[userSelection].ToString() == "Health Potion")
-            {
-              HealthPotion potion = (HealthPotion)inventory[userSelection];
-              Console.WriteLine("You take the health potion!");
-              int temp = _attacker.Health + potion.Take();
-              if (temp > _attacker.MaxHP)
-              {
-                _attacker.Health = _attacker.MaxHP;
-              }
-              else
-              {
-                _attacker.Health += potion.Take();
-              }
-              inventory.Remove(inventory[userSelection]);
-            }
-          }
+          CheckInventory(inventory);
           break;
       }
 
@@ -109,6 +81,54 @@ public class Battle
       return enemies[enemyNumber];
     }
     return enemies[0];
+  }
+
+  private static void CheckInventory(List<Item> inventory)
+  {
+    if (inventory.Count==0)
+    {
+      Console.WriteLine("Backpack is empty!");
+      return;
+    }
+
+    if (_attacker.Ai)
+    {
+      Random random = new Random();
+      TakeHealth(inventory, random.Next(inventory.Count()));
+      return;
+    }
+
+    if (!_attacker.Ai)
+    {
+      for (int i = 0; i < inventory.Count; i++)
+      {
+        Console.WriteLine($"{i + 1} - {inventory[i]}");
+      }
+      Console.WriteLine("What would you like to take? (enter number)");
+      if (int.TryParse(Console.ReadLine(), out int userSelection))
+      {
+        TakeHealth(inventory, userSelection);
+      }
+    }
+    
+    static void TakeHealth(List<Item> inventory, int selection)
+    {
+      if (inventory[selection].ToString() == "Health Potion")
+      {
+        HealthPotion potion = (HealthPotion)inventory[selection];
+        Console.WriteLine($"{_attacker.Name} takes the health potion!");
+        int temp = _attacker.Health + potion.Take();
+        if (temp > _attacker.MaxHP)
+        {
+          _attacker.Health = _attacker.MaxHP;
+        }
+        else
+        {
+          _attacker.Health += potion.Take();
+        }
+        inventory.Remove(inventory[selection]);
+      }
+    }
   }
   private static bool GameStatus(List<Character> defense)
   {
