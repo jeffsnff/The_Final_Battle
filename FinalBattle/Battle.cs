@@ -17,14 +17,15 @@ public class Battle
   {
     Status.Enemies = _enemies.Members;
     Status.Heros = _heros.Members;
-    Turn(_heros.Members, _enemies.Members);
+    
+    Turn(_heros.Members, _enemies.Members, _heros._inventory);
     if (_enemies.Count <= 0)
     {
       return;
     }
-    Turn(_enemies.Members, _heros.Members);
+    Turn(_enemies.Members, _heros.Members, _enemies._inventory);
   }
-  private void Turn(List<Character> offense, List<Character> defense)
+  private void Turn(List<Character> offense, List<Character> defense, List<Item> inventory)
   {
     foreach (Character member in offense)
     {
