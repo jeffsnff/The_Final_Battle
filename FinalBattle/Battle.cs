@@ -46,7 +46,7 @@ public class Battle
       }
       
       Console.WriteLine();
-      Death(defense);
+      DeathMechanic(defense);
       // Console.Clear();
     }
   }
@@ -72,7 +72,6 @@ public class Battle
       {
         return enemies[0];
       }
-
       return enemies[enemyNumber];
     }
     return enemies[0];
@@ -86,7 +85,7 @@ public class Battle
     return true;
   }
 
-  private static void Death(List<Character> defense)
+  private static void DeathMechanic(List<Character> defense)
   {
     for (int i = 0; i < defense.Count; i++)
     {
