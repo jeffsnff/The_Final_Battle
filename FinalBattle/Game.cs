@@ -13,7 +13,7 @@ public class Game
     Party enemyWaveOne = new Party();
     Party enemyWaveTwo = new Party();
     Party bossBattle = new Party();
-    List<Party> enemies = new List<Party>();
+    List<Party> enemyArmy = new List<Party>();
 
     // _gameMode = SelectGameMode();
     switch (_gameMode = 3) // Jeffrey remove this number uncomment SelectGameMode() to select manually
@@ -47,7 +47,7 @@ public class Game
     // Game Loop
     while (enemyArmy.Count > 0 && heros.party.Count > 0)
     {
-      foreach (Party wave in enemies)
+      foreach (Party wave in enemyArmy)
       {
         Battle battle = new Battle(heros, wave);
         while (wave.party.Count > 0)
