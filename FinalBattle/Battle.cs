@@ -130,15 +130,6 @@ public class Battle
       }
     }
   }
-  private static bool GameStatus(List<Character> defense)
-  {
-    if (defense.Count == 0)
-    {
-      return false;
-    }
-    return true;
-  }
-
   private static void DeathMechanic(List<Character> defense)
   {
     for (int i = 0; i < defense.Count; i++)
