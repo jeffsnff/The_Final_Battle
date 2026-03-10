@@ -15,15 +15,15 @@ public class Battle
 
   public void ExecuteBattle()
   {
-    Status.Enemies = _enemies.Members;
-    Status.Heros = _heros.Members;
+    Status.Enemies = _enemies.party;
+    Status.Heros = _heros.party;
     
-    Turn(_heros.Members, _enemies.Members, _heros._inventory);
-    if (_enemies.Count <= 0)
+    Turn(_heros.party, _enemies.party, _heros.Inventory);
+    if (_enemies.party.Count <= 0)
     {
       return;
     }
-    Turn(_enemies.Members, _heros.Members, _enemies._inventory);
+    Turn(_enemies.party, _heros.party, _enemies.Inventory);
   }
   private void Turn(List<Character> offense, List<Character> defense, List<Item> inventory)
   {
