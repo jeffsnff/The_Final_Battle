@@ -1,4 +1,5 @@
 using System.Reflection.Metadata.Ecma335;
+using static FinalBattle.TurnAction;
 
 namespace FinalBattle;
 
@@ -10,7 +11,7 @@ public class Character
   public bool Ai { get; }
   private int MaxHp { get; }
   private int _currentHp;
-  public Action CurrentAttack { get; set; }
+  public TurnAction CurrentAttack { get; set; }
 
   protected Character(string name, int maxHp, bool computerControlled, string attackAction, int attackDamage)
   {
@@ -30,10 +31,10 @@ public class Character
     {
       // Generates a random number based off the number of moves in _Action
       // then selects that action that cooresponds to the number.
-      CurrentAttack = (Action)randomNumber.Next(Enum.GetNames<Action>().Length);
+      CurrentAttack = (TurnAction)randomNumber.Next(Enum.GetNames<TurnAction>().Length);
       return;
     }
-    string[] actions = Enum.GetNames<Action>();
+    string[] actions = Enum.GetNames<TurnAction>();
     while (true)
     {
       Console.WriteLine("What would you like to do?");
@@ -46,7 +47,7 @@ public class Character
       {
         if (!(index > actions.Length))
         {
-          CurrentAttack = Enum.GetValues<Action>().ElementAt(index);
+          CurrentAttack = Enum.GetValues<TurnAction>().ElementAt(index);
           break;
         }
       }
@@ -60,9 +61,9 @@ public class Character
   /// </summary>
   /// <param name="attacker"></param>
   /// <param name="defender"></param>
-  public void PerformAction(Action attack, Character defender = null)
+  public void PerformAction(TurnAction attack, Character defender = null)
   {
-    if (attack == Action.Attack)
+    if (attack == Attack)
     {
       defender.Health = (defender.Health - _attackDamage);
       
@@ -79,11 +80,4 @@ public class Character
   }
   public int MaxHP => MaxHp;
   public virtual string Name => _name;
-
-  public enum Action
-  {
-    Nothing,
-    Inventory,
-    Attack
-  }
 }

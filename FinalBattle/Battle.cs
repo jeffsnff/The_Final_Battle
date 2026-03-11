@@ -1,3 +1,4 @@
+using static FinalBattle.TurnAction;
 namespace FinalBattle;
 
 public class Battle
@@ -37,14 +38,14 @@ public class Battle
 
       switch (_attacker.CurrentAttack)
       {
-        case Character.Action.Attack:
+        case Attack:
           _defender = Enemy_Chooser(defense, member);
           member.PerformAction(_attacker.CurrentAttack, _defender);
           break;
-        case Character.Action.Nothing:
+        case Nothing:
           Console.WriteLine($"{_attacker} did NOTHING.");
           break;
-        case Character.Action.Inventory:
+        case Inventory:
           Console.WriteLine($"{_attacker} checks backpack.");
           CheckInventory(inventory);
           break;
