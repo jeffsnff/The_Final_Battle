@@ -3,24 +3,21 @@ using static FinalBattle.TurnAction;
 
 namespace FinalBattle;
 
-public class Character
+public abstract class Character
 {
   private readonly string _name;
-  private string _attackAction { get; }
-  private int _attackDamage { get; }
   public bool Ai { get; }
   private int MaxHp { get; }
   private int _currentHp;
   public TurnAction CurrentAttack { get; set; }
+  public abstract IAttack Attack { get; }
 
-  protected Character(string name, int maxHp, bool computerControlled, string attackAction, int attackDamage)
+  protected Character(string name, int maxHp, bool computerControlled)
   {
     _name = name;
     Ai = computerControlled;
     MaxHp = maxHp;
     _currentHp = MaxHp;
-    _attackAction = attackAction;
-    _attackDamage = attackDamage;
   }
 
   public void ChooseMove()
@@ -57,18 +54,21 @@ public class Character
   }
 
   /// <summary>
-  /// Displays the character name and action
+  /// Displays the characters move, damage and enemies updated health or death
   /// </summary>
-  /// <param name="attacker"></param>
+  /// <param name="attack"></param>
   /// <param name="defender"></param>
   public void PerformAction(TurnAction attack, Character defender = null)
   {
-    if (attack == Attack)
+    string attackName = Attack.Name;
+    int attackDamage = Attack.Damage;
+    
+    if (attack == TurnAction.Attack)
     {
-      defender.Health = (defender.Health - _attackDamage);
+      defender.Health = (defender.Health - attackDamage);
       
-      Console.WriteLine($"{Name} used {_attackAction} on {defender}.");
-      Console.WriteLine($"{_attackAction} dealt {_attackDamage} damage to {defender}");
+      Console.WriteLine($"{Name} used {attackName} on {defender}.");
+      Console.WriteLine($"{Attack.Name} dealt {attackDamage} damage to {defender}");
       string playerUpdate = defender.Health == 0 ? $"{defender} has died!" : $"{defender} is now {defender.Health}/{defender.MaxHP}";
       Console.WriteLine(playerUpdate);
     }
