@@ -18,7 +18,7 @@ Implemented by following examples and exercises from the C# Player's Guide.
   - [X] The Player Decides
 - Expansions
   - [X] The Game's Status
-  - [ ] Items
+  - [X] Items
   - [ ] Gear
   - [ ] Stolen Inventory
   - [ ] Vin Fletcher
