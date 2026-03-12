@@ -1,4 +1,5 @@
 using static FinalBattle.TurnAction;
+
 namespace FinalBattle;
 
 public class Battle
@@ -43,10 +44,10 @@ public class Battle
           PerformAction(_attacker, _defender);
           break;
         case Nothing:
-          Console.WriteLine($"{_attacker} did NOTHING.");
+          Console.WriteLine($"{_attacker.Name} did NOTHING.");
           break;
         case Inventory:
-          Console.WriteLine($"{_attacker} checks backpack.");
+          Console.WriteLine($"{_attacker.Name} checks backpack.");
           CheckInventory(inventory);
           break;
       }
@@ -136,7 +137,6 @@ public class Battle
     }
     return enemies[0];
   }
-
   private static void CheckInventory(List<Item> inventory)
   {
     if (inventory.Count==0)
@@ -172,9 +172,9 @@ public class Battle
         HealthPotion potion = (HealthPotion)inventory[selection];
         Console.WriteLine($"{_attacker.Name} takes the health potion!");
         int temp = _attacker.Health + potion.Take();
-        if (temp > _attacker.MaxHP)
+        if (temp > _attacker.MaxHp)
         {
-          _attacker.Health = _attacker.MaxHP;
+          _attacker.Health = _attacker.MaxHp;
         }
         else
         {
