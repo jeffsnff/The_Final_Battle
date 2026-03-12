@@ -34,13 +34,13 @@ public class Battle
       Status.currentPlayer = _attacker;
       Status.BattleStatus();
       Console.WriteLine($"It is {member.Name}'s turn...");
-      member.ChooseMove();
+      ChooseMove(_attacker);
 
       switch (_attacker.CurrentAttack)
       {
         case Attack:
           _defender = Enemy_Chooser(defense, member);
-          member.PerformAction(_attacker.CurrentAttack, _defender);
+          PerformAction(_attacker, _defender);
           break;
         case Nothing:
           Console.WriteLine($"{_attacker} did NOTHING.");
@@ -56,7 +56,60 @@ public class Battle
       DeathMechanic(defense);
       // Console.Clear();
     }
+    void ChooseMove(Character attacker)
+    {
+      Random randomNumber = new Random();
+  
+      if (attacker.Ai)
+      {
+        // Generates a random number based off the number of moves in _Action
+        // then selects that action that cooresponds to the number.
+        attacker.CurrentAttack = (TurnAction)randomNumber.Next(Enum.GetNames<TurnAction>().Length);
+        return;
+      }
+      string[] actions = Enum.GetNames<TurnAction>();
+      while (true)
+      {
+        Console.WriteLine("What would you like to do?");
+        for (int i = 0; i < actions.Length; i++)
+        {
+          Console.WriteLine($"{i} - {actions[i]}");
+        }
+  
+        if (int.TryParse(Console.ReadLine(), out int index))
+        {
+          if (!(index > actions.Length))
+          {
+            attacker.CurrentAttack = Enum.GetValues<TurnAction>().ElementAt(index);
+            break;
+          }
+        }
+        Console.WriteLine("That is not an option!");
+        Console.ReadKey();
+      }
+    }
+    void PerformAction(Character attacker, Character defender = null)
+    {
+      // Attack name and damage from IAttack
+      string attackName = attacker.Attack.Name;
+      int attackDamage = attacker.Attack.Damage;
+      
+      if (attacker.CurrentAttack == Attack)
+      {
+        defender.Health = (defender.Health - attackDamage);
+        string attackerName = attacker.Name;
+        string defenderName = defender.Name;
+        int defenderMaxHeath = defender.MaxHp;
+        int defenderCurrentHealth = defender.Health;
+        
+        Console.WriteLine($"{attackerName} used {attackName} on {defenderName}.");
+        Console.WriteLine($"{attackName} dealt {attackDamage} damage to {defenderName}");
+        string playerUpdate = defenderCurrentHealth == 0 ? $"{defenderName} has died!" : $"{defenderName} is now {defenderCurrentHealth}/{defenderMaxHeath}";
+        Console.WriteLine(playerUpdate);
+      }
+    }
   }
+  
   private static Character Enemy_Chooser(List<Character> enemies, Character member)
   {
     
