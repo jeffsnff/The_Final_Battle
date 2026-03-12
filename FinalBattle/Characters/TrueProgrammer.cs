@@ -4,8 +4,4 @@ public class TrueProgrammer(string name, bool computerControlled = false) : Char
 {
   private bool Hero { get; } = true;
   public override IAttack Attack { get; } = new Punch();
-  public override string ToString()
-  {
-    return $"{Name}";
-  }
 }

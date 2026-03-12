@@ -24,6 +24,5 @@ public abstract class Character
     get => _currentHp;
     set => _currentHp = value;
   }
-  public int MaxHP => MaxHp;
-  public virtual string Name => _name;
+  public string Name => _name;
 }
