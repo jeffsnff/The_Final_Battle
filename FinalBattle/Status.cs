@@ -1,6 +1,3 @@
-using System.Net.NetworkInformation;
-using System.Reflection.PortableExecutable;
-
 namespace FinalBattle;
 
 public static class Status

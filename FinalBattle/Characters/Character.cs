@@ -1,6 +1,3 @@
-using System.Reflection.Metadata.Ecma335;
-using static FinalBattle.TurnAction;
-
 namespace FinalBattle;
 
 public abstract class Character
