@@ -1,3 +1,5 @@
+using static FinalBattle.TurnAction;
+
 namespace FinalBattle;
 
 public class Battle
@@ -15,15 +17,15 @@ public class Battle
 
   public void ExecuteBattle()
   {
-    Status.Enemies = _enemies.Members;
-    Status.Heros = _heros.Members;
+    Status.Enemies = _enemies.party;
+    Status.Heros = _heros.party;
     
-    Turn(_heros.Members, _enemies.Members, _heros._inventory);
-    if (_enemies.Count <= 0)
+    Turn(_heros.party, _enemies.party, _heros.Inventory);
+    if (_enemies.party.Count <= 0)
     {
       return;
     }
-    Turn(_enemies.Members, _heros.Members, _enemies._inventory);
+    Turn(_enemies.party, _heros.party, _enemies.Inventory);
   }
   private void Turn(List<Character> offense, List<Character> defense, List<Item> inventory)
   {
@@ -33,19 +35,19 @@ public class Battle
       Status.currentPlayer = _attacker;
       Status.BattleStatus();
       Console.WriteLine($"It is {member.Name}'s turn...");
-      member.ChooseMove();
+      ChooseMove(_attacker);
 
       switch (_attacker.CurrentAttack)
       {
-        case Character.Action.Attack:
+        case Attack:
           _defender = Enemy_Chooser(defense, member);
-          member.PerformAction(_attacker.CurrentAttack, _defender);
+          PerformAction(_attacker, _defender);
           break;
-        case Character.Action.Nothing:
-          Console.WriteLine($"{_attacker} did NOTHING.");
+        case Nothing:
+          Console.WriteLine($"{_attacker.Name} did NOTHING.");
           break;
-        case Character.Action.Inventory:
-          Console.WriteLine($"{_attacker} checks backpack.");
+        case Inventory:
+          Console.WriteLine($"{_attacker.Name} checks backpack.");
           CheckInventory(inventory);
           break;
       }
@@ -55,7 +57,60 @@ public class Battle
       DeathMechanic(defense);
       // Console.Clear();
     }
+    void ChooseMove(Character attacker)
+    {
+      Random randomNumber = new Random();
+  
+      if (attacker.Ai)
+      {
+        // Generates a random number based off the number of moves in _Action
+        // then selects that action that cooresponds to the number.
+        attacker.CurrentAttack = (TurnAction)randomNumber.Next(Enum.GetNames<TurnAction>().Length);
+        return;
+      }
+      string[] actions = Enum.GetNames<TurnAction>();
+      while (true)
+      {
+        Console.WriteLine("What would you like to do?");
+        for (int i = 0; i < actions.Length; i++)
+        {
+          Console.WriteLine($"{i} - {actions[i]}");
+        }
+  
+        if (int.TryParse(Console.ReadLine(), out int index))
+        {
+          if (!(index > actions.Length))
+          {
+            attacker.CurrentAttack = Enum.GetValues<TurnAction>().ElementAt(index);
+            break;
+          }
+        }
+        Console.WriteLine("That is not an option!");
+        Console.ReadKey();
+      }
+    }
+    void PerformAction(Character attacker, Character defender = null)
+    {
+      // Attack name and damage from IAttack
+      string attackName = attacker.Attack.Name;
+      int attackDamage = attacker.Attack.Damage;
+      
+      if (attacker.CurrentAttack == Attack)
+      {
+        defender.Health = (defender.Health - attackDamage);
+        string attackerName = attacker.Name;
+        string defenderName = defender.Name;
+        int defenderMaxHeath = defender.MaxHp;
+        int defenderCurrentHealth = defender.Health;
+        
+        Console.WriteLine($"{attackerName} used {attackName} on {defenderName}.");
+        Console.WriteLine($"{attackName} dealt {attackDamage} damage to {defenderName}");
+        string playerUpdate = defenderCurrentHealth == 0 ? $"{defenderName} has died!" : $"{defenderName} is now {defenderCurrentHealth}/{defenderMaxHeath}";
+        Console.WriteLine(playerUpdate);
+      }
+    }
   }
+  
   private static Character Enemy_Chooser(List<Character> enemies, Character member)
   {
     
@@ -82,7 +137,6 @@ public class Battle
     }
     return enemies[0];
   }
-
   private static void CheckInventory(List<Item> inventory)
   {
     if (inventory.Count==0)
@@ -118,9 +172,9 @@ public class Battle
         HealthPotion potion = (HealthPotion)inventory[selection];
         Console.WriteLine($"{_attacker.Name} takes the health potion!");
         int temp = _attacker.Health + potion.Take();
-        if (temp > _attacker.MaxHP)
+        if (temp > _attacker.MaxHp)
         {
-          _attacker.Health = _attacker.MaxHP;
+          _attacker.Health = _attacker.MaxHp;
         }
         else
         {
@@ -130,15 +184,6 @@ public class Battle
       }
     }
   }
-  private static bool GameStatus(List<Character> defense)
-  {
-    if (defense.Count == 0)
-    {
-      return false;
-    }
-    return true;
-  }
-
   private static void DeathMechanic(List<Character> defense)
   {
     for (int i = 0; i < defense.Count; i++)

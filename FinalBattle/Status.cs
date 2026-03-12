@@ -1,6 +1,3 @@
-using System.Net.NetworkInformation;
-using System.Reflection.PortableExecutable;
-
 namespace FinalBattle;
 
 public static class Status
@@ -28,7 +25,7 @@ public static class Status
 
   private static void CharacterInfo(Character member)
   {
-    string text = $"{member.Name} ({member.Health}/{member.MaxHP})";
+    string text = $"{member.Name} ({member.Health}/{member.MaxHp})";
     if (Enemies.Contains(member))
     {
       Console.CursorLeft = Width - (text.Length + 1);

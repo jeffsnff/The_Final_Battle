@@ -13,47 +13,46 @@ public class Game
     Party enemyWaveOne = new Party();
     Party enemyWaveTwo = new Party();
     Party bossBattle = new Party();
-    List<Party> enemies = new List<Party>();
+    List<Party> enemyArmy = new List<Party>();
 
     // _gameMode = SelectGameMode();
     switch (_gameMode = 3) // Jeffrey remove this number uncomment SelectGameMode() to select manually
     {
       case 1: // Player vs Computer
-        heros.Add = PickHero();
-        
-        enemyWaveOne.Add = new Skeleton();
-        enemyWaveTwo.Add = new Skeleton();
-        enemyWaveTwo.Add = new Skeleton();
-        enemies.Add(enemyWaveOne);
-        enemies.Add(enemyWaveTwo);
+        heros.party.Add(PickHero());
+        enemyWaveOne.party.Add(new Skeleton());
+        enemyWaveTwo.party.Add(new Skeleton());
+        enemyWaveTwo.party.Add(new Skeleton());
+        enemyWaveTwo.party.Add(new Skeleton());
+        enemyArmy.Add(enemyWaveOne);
+        enemyArmy.Add(enemyWaveTwo);
         break;
       case 2: // Player vs Player
-        heros.Add = PickHero();
-
-        enemyWaveOne.Add = new Skeleton();
+        heros.party.Add(PickHero());
+        enemyWaveOne.party.Add(new Skeleton());
         break;
       case 3: // Computer vs Computer
-        heros.Add = PickHero();
+        heros.party.Add(PickHero());
 
-        enemyWaveOne.Add = new Skeleton();
-        enemyWaveTwo.Add = new Skeleton();
-        enemyWaveTwo.Add = new Skeleton();
-        bossBattle.Add = new UnCodedOne();
-        enemies.Add(enemyWaveOne);
-        enemies.Add(enemyWaveTwo);
-        enemies.Add(bossBattle);
+        enemyWaveOne.party.Add(new Skeleton());
+        enemyWaveTwo.party.Add(new Skeleton());
+        enemyWaveTwo.party.Add(new Skeleton());
+        bossBattle.party.Add(new UnCodedOne());
+        enemyArmy.Add(enemyWaveOne);
+        enemyArmy.Add(enemyWaveTwo);
+        enemyArmy.Add(bossBattle);
         break;
     }
 
     // Game Loop
-    while (enemies.Count > 0 && heros.Count > 0)
+    while (enemyArmy.Count > 0 && heros.party.Count > 0)
     {
-      foreach (Party wave in enemies)
+      foreach (Party wave in enemyArmy)
       {
         Battle battle = new Battle(heros, wave);
-        while (wave.Count > 0)
+        while (wave.party.Count > 0)
         {
-          if (wave.Count == 0 || heros.Count == 0)
+          if (wave.party.Count == 0 || heros.party.Count == 0)
           {
             break;
           }
