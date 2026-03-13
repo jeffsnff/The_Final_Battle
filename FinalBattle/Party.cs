@@ -5,5 +5,5 @@ namespace FinalBattle;
 public class Party
 {
   public List<Character> party = [];
-  public List<Item> Inventory = [new HealthPotion(10)];
+  public List<Item> Inventory = [new HealthPotion()];
 }
