@@ -109,6 +109,16 @@ public class Battle
         Console.WriteLine(playerUpdate);
       }
     }
+    void DeathMechanic(List<Character> defense)
+    {
+      for (int i = 0; i < defense.Count; i++)
+      {
+        if (defense[i].Health <= 0)
+        {
+          defense.Remove(defense[i]);
+        }
+      }
+    }
   }
   
   private static Character Enemy_Chooser(List<Character> enemies, Character member)
@@ -184,17 +194,7 @@ public class Battle
       {
         _attacker.Health += potion.Take();
       }
-      Console.WriteLine($"{_attacker.Name} takes the health potion!");
-    }
-  }
-  private static void DeathMechanic(List<Character> defense)
-  {
-    for (int i = 0; i < defense.Count; i++)
-    {
-      if (defense[i].Health <= 0)
-      {
-        defense.Remove(defense[i]);
-      }
+      Console.WriteLine($"{_attacker.Name} takes {potion.Name}!");
     }
   }
 }
