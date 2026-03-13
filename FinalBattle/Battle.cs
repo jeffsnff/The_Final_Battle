@@ -163,9 +163,9 @@ public class Battle
       Console.WriteLine("What would you like to take? (enter number)");
       if (int.TryParse(Console.ReadLine(), out int userSelection))
       {
-        switch (inventory[userSelection].Name)
+        switch (inventory[userSelection])
         {
-          case "Health Potion":
+          case HealthPotion:
             TakeHealth((HealthPotion)inventory[userSelection]);
             inventory.Remove(inventory[userSelection]);
             break;
