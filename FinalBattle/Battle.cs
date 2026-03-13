@@ -148,7 +148,9 @@ public class Battle
     if (_attacker.Ai)
     {
       Random random = new Random();
-      TakeHealth(inventory, random.Next(inventory.Count()));
+      int selection = random.Next(inventory.Count());
+      TakeHealth((HealthPotion)inventory[selection]);
+      inventory.Remove(inventory[selection]);
       return;
     }
 
@@ -161,27 +163,28 @@ public class Battle
       Console.WriteLine("What would you like to take? (enter number)");
       if (int.TryParse(Console.ReadLine(), out int userSelection))
       {
-        TakeHealth(inventory, userSelection);
+        switch (inventory[userSelection].Name)
+        {
+          case "Health Potion":
+            TakeHealth((HealthPotion)inventory[userSelection]);
+            inventory.Remove(inventory[userSelection]);
+            break;
+        }
       }
     }
     
-    static void TakeHealth(List<Item> inventory, int selection)
+    static void TakeHealth(HealthPotion potion)
     {
-      if (inventory[selection].ToString() == "Health Potion")
+      int temp = _attacker.Health + potion.Take();
+      if (temp > _attacker.MaxHp)
       {
-        HealthPotion potion = (HealthPotion)inventory[selection];
-        Console.WriteLine($"{_attacker.Name} takes the health potion!");
-        int temp = _attacker.Health + potion.Take();
-        if (temp > _attacker.MaxHp)
-        {
-          _attacker.Health = _attacker.MaxHp;
-        }
-        else
-        {
-          _attacker.Health += potion.Take();
-        }
-        inventory.Remove(inventory[selection]);
+        _attacker.Health = _attacker.MaxHp;
       }
+      else
+      {
+        _attacker.Health += potion.Take();
+      }
+      Console.WriteLine($"{_attacker.Name} takes the health potion!");
     }
   }
   private static void DeathMechanic(List<Character> defense)
