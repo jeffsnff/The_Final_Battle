@@ -1,16 +1,11 @@
 namespace FinalBattle;
 
-public class HealthPotion(int healingPower) : Item("Health Potion")
+public class HealthPotion() : Item()
 {
-    private int _healingPower = healingPower;
-
+    private int _healingPower = 5;
+    public override string Name { get; }= "Health Potion";
     public int Take()
     {
         return _healingPower;
-    }
-    
-    public override string ToString()
-    {
-        return $"{Name}";
     }
 }

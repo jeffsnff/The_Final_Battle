@@ -1,13 +1,6 @@
 namespace FinalBattle;
 
-public class Item
+public abstract class Item
 {
-  private string _name;
-
-  public Item(string name)
-  {
-    _name = name;
-  }
-
-  public virtual string Name => _name;
+  public abstract string Name { get; }
 }

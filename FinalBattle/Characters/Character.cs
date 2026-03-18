@@ -2,15 +2,14 @@ namespace FinalBattle;
 
 public abstract class Character
 {
-  private readonly string _name;
+  public abstract string Name { get; }
   public bool Ai { get; }
   public abstract int MaxHp { get; }
   private int _currentHp;
   public TurnAction CurrentAttack { get; set; }
   public abstract IAttack Attack { get; }
-  protected Character(string name, bool computerControlled)
+  protected Character(bool computerControlled)
   {
-    _name = name;
     Ai = computerControlled;
     _currentHp = MaxHp;
   }
@@ -19,5 +18,5 @@ public abstract class Character
     get => _currentHp;
     set => _currentHp = value;
   }
-  public string Name => _name;
+  // public string Name => _name;
 }

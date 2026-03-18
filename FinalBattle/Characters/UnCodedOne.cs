@@ -1,7 +1,8 @@
 namespace FinalBattle;
 
-public class UnCodedOne() : Character("Uncoded One", true)
+public class UnCodedOne() : Character(true)
 {
+  public override string Name { get; } = "UNCODED ONE";
   public override int MaxHp { get; } = 15;
   public override IAttack Attack { get; } = new UnRaviling();
 }
