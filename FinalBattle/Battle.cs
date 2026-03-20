@@ -13,6 +13,20 @@ public class Battle
   {
     _heros = heros;
     _enemies = enemies;
+    AddInventory(_heros);
+    AddInventory(_enemies);
+    
+  }
+
+  private void AddInventory(Party party)
+  {
+    if (party.Equals(_heros))
+    {
+      party.Inventory.Add(new HealthPotion());
+      party.Inventory.Add(new Sword());
+      return;
+    }
+    party.Inventory.Add(new HealthPotion());
   }
 
   public void ExecuteBattle()
