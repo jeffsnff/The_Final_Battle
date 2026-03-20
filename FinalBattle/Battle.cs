@@ -108,6 +108,19 @@ public class Battle
       // Attack name and damage from IAttack
       string attackName = attacker.Attack.Name;
       int attackDamage = attacker.Attack.Damage;
+
+      if (attacker.Armor.Any())
+      {
+        foreach (var (key ,value) in attacker.Armor)
+        {
+          switch (key)
+          {
+            case GearType.Sword:
+              attackDamage += value.Attack;
+              break;
+          }
+        }
+      }
       
       if (attacker.CurrentAttack == Attack)
       {
