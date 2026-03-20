@@ -173,8 +173,7 @@ public class Battle
     {
       Random random = new Random();
       int selection = random.Next(inventory.Count());
-      TakeHealth((HealthPotion)inventory[selection]);
-      inventory.Remove(inventory[selection]);
+      UserSection(selection, inventory);
       return;
     }
 
@@ -187,16 +186,37 @@ public class Battle
       Console.WriteLine("What would you like to take? (enter number)");
       if (int.TryParse(Console.ReadLine(), out int userSelection))
       {
-        switch (inventory[userSelection])
-        {
-          case HealthPotion:
-            TakeHealth((HealthPotion)inventory[userSelection]);
-            inventory.Remove(inventory[userSelection]);
-            break;
-        }
+        UserSection(userSelection, inventory);
       }
     }
-    
+
+    static void UserSection(int userSelection, List<Item> inventory)
+    {
+      switch (inventory[userSelection])
+      {
+        case HealthPotion:
+          TakeHealth((HealthPotion)inventory[userSelection]);
+          inventory.Remove(inventory[userSelection]);
+          break;
+        case Gear:
+          EquipEquipment((Gear)inventory[userSelection], inventory);
+          break;
+      }
+    }
+    static void EquipEquipment(Gear armor, List<Item> inventory)
+    {
+      if (!_attacker.Armor.Any())
+      {
+        _attacker.Armor.Add(armor.Type, armor);
+        inventory.Remove(armor);
+      }
+      else
+      {
+        _attacker.Armor.Remove(_attacker.Armor.First().Key);
+        _attacker.Armor.Add(armor.Type, armor);
+      }
+      Console.WriteLine($"{_attacker.Name} equipped {armor.Name}");
+    }
     static void TakeHealth(HealthPotion potion)
     {
       int temp = _attacker.Health + potion.Take();
