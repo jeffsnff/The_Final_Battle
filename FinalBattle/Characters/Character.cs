@@ -6,6 +6,7 @@ public abstract class Character
   public bool Ai { get; }
   public abstract int MaxHp { get; }
   private int _currentHp;
+  public abstract Dictionary<GearType, Gear> Armor { get; }
   public TurnAction CurrentAttack { get; set; }
   public abstract IAttack Attack { get; }
   protected Character(bool computerControlled)
