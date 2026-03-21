@@ -191,6 +191,7 @@ public class Battle
       Console.WriteLine("What would you like to take? (enter number)");
       if (int.TryParse(Console.ReadLine(), out int userSelection))
       {
+        userSelection -= 1;
         UserSection(userSelection, inventory);
       }
     }
