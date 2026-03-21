@@ -18,17 +18,6 @@ public class Battle
     
   }
 
-  private void AddInventory(Party party)
-  {
-    if (party.Equals(_heros))
-    {
-      party.Inventory.Add(new HealthPotion());
-      party.Inventory.Add(new Sword());
-      return;
-    }
-    party.Inventory.Add(new HealthPotion());
-  }
-
   public void ExecuteBattle()
   {
     Status.Enemies = _enemies.party;
@@ -242,5 +231,16 @@ public class Battle
       }
       Console.WriteLine($"{_attacker.Name} takes {potion.Name}!");
     }
+  }
+  private void AddInventory(Party party)
+  {
+    if (party.Equals(_heros))
+    {
+      party.Inventory.Add(new HealthPotion());
+      party.Inventory.Add(new Sword());
+      party.Inventory.Add(new Sword());
+      return;
+    }
+    party.Inventory.Add(new HealthPotion());
   }
 }
