@@ -65,7 +65,7 @@ public class Battle
   
       if (attacker.Ai)
       {
-        // Generates a random number based off the number of moves in _Action
+        // Generates a random number based off the number of moves in TurnAction
         // then selects that action that cooresponds to the number.
         attacker.CurrentAttack = (TurnAction)randomNumber.Next(Enum.GetNames<TurnAction>().Length);
         return;
