@@ -211,15 +211,21 @@ public class Battle
     }
     static void EquipEquipment(Gear armor, List<Item> inventory)
     {
-      if (!_attacker.Armor.Any())
+      if (_attacker.Armor.TryGetValue(armor.Type, out Gear ?currentArmor))
       {
+        if (currentArmor.Equals(null))
+        {
+          return;
+        }
+        _attacker.Armor.Remove(currentArmor.Type);
+        inventory.Add(currentArmor);
         _attacker.Armor.Add(armor.Type, armor);
         inventory.Remove(armor);
       }
       else
       {
-        _attacker.Armor.Remove(_attacker.Armor.First().Key);
         _attacker.Armor.Add(armor.Type, armor);
+        inventory.Remove(armor);
       }
       Console.WriteLine($"{_attacker.Name} equipped {armor.Name}");
     }
