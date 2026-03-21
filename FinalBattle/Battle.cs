@@ -113,6 +113,10 @@ public class Battle
       if (attacker.CurrentAttack == Attack)
       {
         defender.Health = (defender.Health - attackDamage);
+        if (defender.Health < 0)
+        {
+          defender.Health = 0;
+        }
         string attackerName = attacker.Name;
         string defenderName = defender.Name;
         int defenderMaxHeath = defender.MaxHp;
