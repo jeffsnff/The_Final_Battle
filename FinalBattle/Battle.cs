@@ -99,7 +99,7 @@ public class Battle
 
       if (attacker.Armor.Any())
       {
-        foreach (var (key ,value) in attacker.Armor)
+        foreach (var (key,value) in attacker.Armor)
         {
           switch (key)
           {
