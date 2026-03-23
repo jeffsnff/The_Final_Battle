@@ -1,9 +1,10 @@
 namespace FinalBattle
 {
-    public enum TurnAction
+    public enum Action
     {
         Nothing,
         Inventory,
-        Attack
+        Attack,
+        Special
     }
 }
