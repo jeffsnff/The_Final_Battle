@@ -20,8 +20,8 @@ public class Battle
 
   public void ExecuteBattle()
   {
-    Status.Enemies = _enemies.party;
-    Status.Heros = _heros.party;
+    BattleUI.Enemies = _enemies.party;
+    BattleUI.Heros = _heros.party;
     Turn(_heros.party, _enemies.party, _heros.Inventory);
     if (_enemies.party.Count <= 0)
     {
