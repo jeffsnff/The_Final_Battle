@@ -6,7 +6,8 @@ public abstract class Character
   public bool Ai { get; }
   public abstract int MaxHp { get; }
   private int _currentHp;
-  public TurnAction CurrentAttack { get; set; }
+  public abstract Dictionary<GearType, Gear> Armor { get; }
+  public Action CurrentAttack { get; set; }
   public abstract IAttack Attack { get; }
   protected Character(bool computerControlled)
   {
@@ -18,5 +19,4 @@ public abstract class Character
     get => _currentHp;
     set => _currentHp = value;
   }
-  // public string Name => _name;
 }

@@ -1,6 +1,6 @@
 namespace FinalBattle;
 
-public static class Status
+public static class BattleUI
 {
   private static readonly int Width = Console.WindowWidth;
   public static List<Character> Heros { get; set; }
