@@ -19,5 +19,4 @@ public abstract class Character
     get => _currentHp;
     set => _currentHp = value;
   }
-  // public string Name => _name;
 }

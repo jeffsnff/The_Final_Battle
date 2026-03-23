@@ -4,7 +4,7 @@ class Program
 {
   static void Main(string[] args)
   {
-    /* TO DO: 
+    /* TODO: 
      * Jeffrey, you need to check everything in an external console later
      */
     Console.SetWindowSize(100,100);
