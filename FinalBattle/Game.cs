@@ -26,10 +26,12 @@ public class Game
         enemyWaveTwo.party.Add(new Skeleton());
         enemyArmy.Add(enemyWaveOne);
         enemyArmy.Add(enemyWaveTwo);
+        StoryTime(heros.party[0].Name);
         break;
       case 2: // Player vs Player
         heros.party.Add(PickHero());
         enemyWaveOne.party.Add(new Skeleton());
+        StoryTime(heros.party[0].Name);
         break;
       case 3: // Computer vs Computer
         heros.party.Add(PickHero());
@@ -92,6 +94,27 @@ public class Game
     }
 
     return 1;
+  }
+
+  private void StoryTime(string playerName)
+  {
+    Console.Clear();
+    Console.WriteLine("You make your way to the Uncoded One Fortress.");
+    Console.WriteLine("The height of the fortress is so large you see birds fly near the top of the spires.");
+    Thread.Sleep(8000);
+    Console.WriteLine();
+    Console.WriteLine("Walking up to the entrance, the ground beneath you starts to tremble.");
+    Console.WriteLine("Slowly, the massive doors leading inside start to open, revealing a pitch black entry.");
+    Console.WriteLine("Out of the darkness comes a voice, loud and deep...");
+    Console.WriteLine($"Enter {playerName}. It is your time to die!");
+    Thread.Sleep(8000);
+    Console.WriteLine();
+    Console.WriteLine("You stop in your tracks... scared...");
+    Console.WriteLine("Taking a deep breath, you remember all the people that you helped. Remembering all the good in this land.");
+    Console.WriteLine("Press key to continue...");
+    Console.ReadKey();
+    Console.WriteLine("Breathing out slowly you continue on...");
+    Thread.Sleep(3000);
   }
 
   /// <summary>
