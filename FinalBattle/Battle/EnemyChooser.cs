@@ -2,6 +2,12 @@ namespace FinalBattle;
 
 public static class EnemyChooser
 {
+    /// <summary>
+    /// Allows user to select an ememy to attack
+    /// </summary>
+    /// <param name="member"></param>
+    /// <param name="enemies"></param>
+    /// <returns></returns>
     public static Character SelectEnemy(Character member, List<Character> enemies)
   {
     if (member.Ai)

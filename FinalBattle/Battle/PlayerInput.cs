@@ -2,6 +2,11 @@ namespace FinalBattle;
 
 public static class PlayerInput
 {
+    /// <summary>
+    /// Allows character to choose their move from enum Action in Action.cs
+    /// </summary>
+    /// <param name="attacker"></param>
+    /// <returns></returns>
     public static Action Move(Character attacker)
     {
         Random randomNumber = new Random();

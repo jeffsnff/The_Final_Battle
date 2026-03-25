@@ -8,6 +8,12 @@ namespace FinalBattle;
 
 public static class TurnManager
 {
+  /// <summary>
+  /// Execute a round of battle per character in the attacking party
+  /// </summary>
+  /// <param name="offense"></param>
+  /// <param name="defense"></param>
+  /// <param name="inventory"></param>
   public static void Turn(List<Character> offense, List<Character> defense, List<Item> inventory)
   {
     foreach (Character member in offense)
