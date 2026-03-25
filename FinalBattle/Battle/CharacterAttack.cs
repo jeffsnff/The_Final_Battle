@@ -4,6 +4,11 @@ namespace FinalBattle;
 
 public static class CharacterAttack
 {
+    /// <summary>
+    /// Character Attack action. Will check to see if character selected special attack and update attack power accordingly
+    /// </summary>
+    /// <param name="attacker"></param>
+    /// <param name="defender"></param>
     public static void Attack(Character attacker, Character defender = null)
     {
         // Attack name and damage from IAttack
@@ -25,15 +30,11 @@ public static class CharacterAttack
             }
         }
       
-        defender.Health = (defender.Health - attackDamage);
-        if (defender.Health < 0)
-        {
-            defender.Health = 0;
-        }
+        defender.TakeDamage(attackDamage);
         string attackerName = attacker.Name;
         string defenderName = defender.Name;
         int defenderMaxHeath = defender.MaxHp;
-        int defenderCurrentHealth = defender.Health;
+        int defenderCurrentHealth = defender.CurrentHp;
       
         Console.WriteLine($"{attackerName} used {attackName} on {defenderName}.");
         Console.WriteLine($"{attackName} dealt {attackDamage} damage to {defenderName}");

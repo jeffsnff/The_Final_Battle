@@ -25,7 +25,7 @@ public static class BattleUI
 
   private static void CharacterInfo(Character member)
   {
-    string text = $"{member.Name} ({member.Health}/{member.MaxHp})";
+    string text = $"{member.Name} ({member.CurrentHp}/{member.MaxHp})";
     if (Enemies.Contains(member))
     {
       Console.CursorLeft = Width - (text.Length + 1);
@@ -42,6 +42,9 @@ public static class BattleUI
     }
   }
 
+  /// <summary>
+  /// Creates the UI for the battle
+  /// </summary>
   public static void BattleStatus()
   {
     CreateBorder("=", " BATTLE ");

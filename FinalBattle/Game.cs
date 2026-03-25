@@ -15,8 +15,8 @@ public class Game
     Party bossBattle = new Party();
     List<Party> enemyArmy = new List<Party>();
 
-    // _gameMode = SelectGameMode();
-    switch (_gameMode = 3) // Jeffrey remove this number uncomment SelectGameMode() to select manually
+    _gameMode = SelectGameMode();
+    switch (_gameMode)
     {
       case 1: // Player vs Computer
         heros.party.Add(PickHero());
@@ -72,7 +72,7 @@ public class Game
     Console.WriteLine("Game Over!");
     Console.ReadKey();
   }
-
+  
   /// <summary>
   /// User select which game mode they want
   /// Options are;
@@ -92,7 +92,7 @@ public class Game
     {
       return mode;
     }
-
+    
     return 1;
   }
 
@@ -118,10 +118,10 @@ public class Game
   }
 
   /// <summary>
-  /// Allows player to name their hero
+  /// Allow user to choose their characters name. Default "Player"
   /// </summary>
-  /// <returns>TruProgrammer Class</returns>
-  private TrueProgrammer PickHero(string player = "Player")
+  /// <returns>String : Player chosen name</returns>
+  private TrueProgrammer PickHero()
   {
     if (_gameMode.Equals(3))
     {

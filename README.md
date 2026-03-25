@@ -19,7 +19,7 @@ Implemented by following examples and exercises from the C# Player's Guide.
 - Expansions
   - [X] The Game's Status
   - [X] Items
-  - [ ] Gear
+  - [X] Gear
   - [ ] Stolen Inventory
   - [ ] Vin Fletcher
   - [ ] Attack Modifiers
