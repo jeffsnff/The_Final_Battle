@@ -18,6 +18,9 @@ public class Battle
     
   }
 
+  /// <summary>
+  /// Execute the Game battle from beginning of program
+  /// </summary>
   public void ExecuteBattle()
   {
     BattleUI.Enemies = _enemies.party;
@@ -30,12 +33,15 @@ public class Battle
     Turn(_enemies.party, _heros.party, _enemies.Inventory);
   }
   
+  /// <summary>
+  /// Adds inventory to party from start of game
+  /// </summary>
+  /// <param name="party"></param>
   private void AddInventory(Party party)
   {
     if (party.Equals(_heros))
     {
       party.Inventory.Add(new HealthPotion());
-      party.Inventory.Add(new Sword());
       party.Inventory.Add(new Sword());
       return;
     }
