@@ -7,38 +7,38 @@ public static class PlayerInput
     /// </summary>
     /// <param name="attacker"></param>
     /// <returns></returns>
-    public static Action Move(Character attacker)
+    public static int UserSelection(Character attacker, List<string> options)
     {
-        Random randomNumber = new Random();
-  
         if (attacker.Ai)
         {
             // Generates a random number based off the number of moves in TurnAction
             // then selects that action that cooresponds to the number.
-            return attacker.CurrentAttack = (Action)randomNumber.Next(Enum.GetNames<Action>().Length);
+            Random randomNumber = new Random();
+            return randomNumber.Next(options.Count);
         }
-        string[] actions = Enum.GetNames<Action>();
+        
         while (true)
         {
+            while (Console.KeyAvailable)
+            {
+                Console.ReadKey(false);
+            }
+            
             Console.WriteLine("What would you like to do?");
-            for (int i = 0; i < actions.Length; i++)
+            for (int i = 0; i < options.Count; i++)
             {
-                if ((i+1) == actions.Length && !attacker.Armor.Any())
-                {
-                    break;
-                }
-                Console.WriteLine($"{i} - {actions[i]}");
+                Console.WriteLine($"{i} - {options[i]}");
             }
-  
-            if (int.TryParse(Console.ReadLine(), out int index))
+
+            int.TryParse(Console.ReadLine(), out int index);
+            if (0 < index && index < options.Count)
             {
-                if (!(index > actions.Length))
-                {
-                    return attacker.CurrentAttack = Enum.GetValues<Action>().ElementAt(index);
-                }
+                return index;
             }
+            
             Console.WriteLine("That is not an option!");
-            Console.ReadKey();
+            Thread.Sleep(1000);
+            Console.Clear();
         }
     }
 }
