@@ -47,6 +47,7 @@ public static class BattleUI
   /// </summary>
   public static void BattleStatus()
   {
+    Console.Clear();
     CreateBorder("=", " BATTLE ");
     foreach (Character member in Heros)
     {
