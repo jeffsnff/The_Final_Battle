@@ -3,7 +3,7 @@ namespace FinalBattle;
 public class Game
 {
   private bool _status = true;
-  private int _gameMode;
+  private int _gameMode = SelectGameMode();
 
   public Game() { }
 
@@ -14,8 +14,7 @@ public class Game
     Party enemyWaveTwo = new Party();
     Party bossBattle = new Party();
     List<Party> enemyArmy = new List<Party>();
-
-    _gameMode = SelectGameMode();
+    
     switch (_gameMode)
     {
       case 1: // Player vs Computer
@@ -74,28 +73,35 @@ public class Game
   }
   
   /// <summary>
-  /// User select which game mode they want
-  /// Options are;
-  /// 1. Player vs Computer
-  /// 2. Player vs Player
-  /// 3. Computer vs Computer
+  /// User selects which game mode they want
   /// </summary>
   /// <returns></returns>
   private static int SelectGameMode()
   {
-    Console.WriteLine("Choose how you want to play the game:");
-    Console.WriteLine("1: Player vs Computer");
-    Console.WriteLine("2: Player vs Player");
-    Console.WriteLine("3: Computer vs Computer");
-
-    if (int.TryParse(Console.ReadLine(), out int mode))
+    while (true)
     {
-      return mode;
+      Console.WriteLine("Choose how you want to play the game:");
+      Console.WriteLine("1: Player vs Computer");
+      Console.WriteLine("2: Player vs Player");
+      Console.WriteLine("3: Computer vs Computer");
+      
+      int.TryParse(Console.ReadLine(), out int mode);
+      switch (mode)
+      {
+        case 3:
+          return 3;
+        case 2:
+          return 2;
+        default:
+          return 1;
+      }
     }
-    
-    return 1;
   }
 
+  /// <summary>
+  /// Displays intro story
+  /// </summary>
+  /// <param name="playerName"></param>
   private void StoryTime(string playerName)
   {
     Console.Clear();
@@ -111,6 +117,10 @@ public class Game
     Console.WriteLine();
     Console.WriteLine("You stop in your tracks... scared...");
     Console.WriteLine("Taking a deep breath, you remember all the people that you helped. Remembering all the good in this land.");
+    while (Console.KeyAvailable)
+    {
+      Console.ReadKey(false);
+    }
     Console.WriteLine("Press key to continue...");
     Console.ReadKey();
     Console.WriteLine("Breathing out slowly you continue on...");

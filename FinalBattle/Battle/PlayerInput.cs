@@ -3,42 +3,45 @@ namespace FinalBattle;
 public static class PlayerInput
 {
     /// <summary>
-    /// Allows character to choose their move from enum Action in Action.cs
+    /// Allows character to choose what they want from a list of options
     /// </summary>
     /// <param name="attacker"></param>
+    /// <param name="options"></param>
+    /// <param name="question"></param>
     /// <returns></returns>
-    public static Action Move(Character attacker)
+    public static int UserSelection(Character attacker, List<string> options, string question)
     {
-        Random randomNumber = new Random();
-  
-        if (attacker.Ai)
-        {
-            // Generates a random number based off the number of moves in TurnAction
-            // then selects that action that cooresponds to the number.
-            return attacker.CurrentAttack = (Action)randomNumber.Next(Enum.GetNames<Action>().Length);
-        }
-        string[] actions = Enum.GetNames<Action>();
         while (true)
         {
-            Console.WriteLine("What would you like to do?");
-            for (int i = 0; i < actions.Length; i++)
+            BattleUI.BattleStatus();
+            if (attacker.Ai)
             {
-                if ((i+1) == actions.Length && !attacker.Armor.Any())
-                {
-                    break;
-                }
-                Console.WriteLine($"{i} - {actions[i]}");
+                // Generates a random number based off the number of items in options
+                Random randomNumber = new Random();
+                return randomNumber.Next(options.Count);
             }
-  
-            if (int.TryParse(Console.ReadLine(), out int index))
+            
+            // Clears any accidental key press
+            while (Console.KeyAvailable)
             {
-                if (!(index > actions.Length))
-                {
-                    return attacker.CurrentAttack = Enum.GetValues<Action>().ElementAt(index);
-                }
+                Console.ReadKey(false);
             }
+            
+            Console.WriteLine(question);
+            for (int i = 0; i < options.Count; i++)
+            {
+                Console.WriteLine($"{i} - {options[i]}");
+            }
+
+            int.TryParse(Console.ReadLine(), out int index);
+            if (0 <= index && index < options.Count)
+            {
+                return index;
+            }
+            
             Console.WriteLine("That is not an option!");
-            Console.ReadKey();
+            Thread.Sleep(1000);
+            Console.Clear();
         }
     }
 }

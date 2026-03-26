@@ -4,42 +4,42 @@ namespace FinalBattle;
 
 public class Battle
 {
-  private Party _heros;
-  private Party _enemies;
+  private readonly Party _heroes;
+  private readonly Party _enemies;
   private static Character _attacker;
   private static Character _defender;
 
-  public Battle(Party heros, Party enemies)
+  public Battle(Party heroes, Party enemies)
   {
-    _heros = heros;
+    _heroes = heroes;
     _enemies = enemies;
-    AddInventory(_heros);
+    AddInventory(_heroes);
     AddInventory(_enemies);
     
   }
 
   /// <summary>
-  /// Execute the Game battle from beginning of program
+  /// Execute the Game Battle
   /// </summary>
   public void ExecuteBattle()
   {
     BattleUI.Enemies = _enemies.party;
-    BattleUI.Heros = _heros.party;
-    Turn(_heros.party, _enemies.party, _heros.Inventory);
+    BattleUI.Heros = _heroes.party;
+    Turn(_heroes.party, _enemies.party, _heroes.Inventory);
     if (_enemies.party.Count <= 0)
     {
       return;
     }
-    Turn(_enemies.party, _heros.party, _enemies.Inventory);
+    Turn(_enemies.party, _heroes.party, _enemies.Inventory);
   }
   
   /// <summary>
-  /// Adds inventory to party from start of game
+  /// Adds inventory to the party
   /// </summary>
   /// <param name="party"></param>
   private void AddInventory(Party party)
   {
-    if (party.Equals(_heros))
+    if (party.Equals(_heroes))
     {
       party.Inventory.Add(new HealthPotion());
       party.Inventory.Add(new Sword());
