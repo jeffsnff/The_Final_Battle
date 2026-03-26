@@ -3,7 +3,7 @@ namespace FinalBattle;
 public class Game
 {
   private bool _status = true;
-  private int _gameMode;
+  private int _gameMode = SelectGameMode();
 
   public Game() { }
 
@@ -14,8 +14,7 @@ public class Game
     Party enemyWaveTwo = new Party();
     Party bossBattle = new Party();
     List<Party> enemyArmy = new List<Party>();
-
-    _gameMode = SelectGameMode();
+    
     switch (_gameMode)
     {
       case 1: // Player vs Computer
@@ -99,6 +98,10 @@ public class Game
     }
   }
 
+  /// <summary>
+  /// Displays intro story
+  /// </summary>
+  /// <param name="playerName"></param>
   private void StoryTime(string playerName)
   {
     Console.Clear();
