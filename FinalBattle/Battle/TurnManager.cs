@@ -20,7 +20,6 @@ public static class TurnManager
     {
       Character attacker = member;
       BattleUI.currentPlayer = attacker;
-      BattleUI.BattleStatus();
       Console.WriteLine($"It is {member.Name}'s turn...");
       attacker.CurrentAttack = ActionChooser.Action(attacker);
 

@@ -3,22 +3,25 @@ namespace FinalBattle;
 public static class PlayerInput
 {
     /// <summary>
-    /// Allows character to choose their move from enum Action in Action.cs
+    /// Allows character to choose what they want from a list of options
     /// </summary>
     /// <param name="attacker"></param>
+    /// <param name="options"></param>
+    /// <param name="question"></param>
     /// <returns></returns>
     public static int UserSelection(Character attacker, List<string> options, string question)
     {
-        if (attacker.Ai)
-        {
-            // Generates a random number based off the number of moves in TurnAction
-            // then selects that action that cooresponds to the number.
-            Random randomNumber = new Random();
-            return randomNumber.Next(options.Count);
-        }
-        
         while (true)
         {
+            BattleUI.BattleStatus();
+            if (attacker.Ai)
+            {
+                // Generates a random number based off the number of items in options
+                Random randomNumber = new Random();
+                return randomNumber.Next(options.Count);
+            }
+            
+            // Clears any accidental key press
             while (Console.KeyAvailable)
             {
                 Console.ReadKey(false);
