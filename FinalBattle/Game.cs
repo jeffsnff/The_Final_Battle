@@ -74,11 +74,7 @@ public class Game
   }
   
   /// <summary>
-  /// User select which game mode they want
-  /// Options are;
-  /// 1. Player vs Computer
-  /// 2. Player vs Player
-  /// 3. Computer vs Computer
+  /// User selects which game mode they want
   /// </summary>
   /// <returns></returns>
   private static int SelectGameMode()
