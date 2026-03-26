@@ -83,17 +83,24 @@ public class Game
   /// <returns></returns>
   private static int SelectGameMode()
   {
-    Console.WriteLine("Choose how you want to play the game:");
-    Console.WriteLine("1: Player vs Computer");
-    Console.WriteLine("2: Player vs Player");
-    Console.WriteLine("3: Computer vs Computer");
-
-    if (int.TryParse(Console.ReadLine(), out int mode))
+    while (true)
     {
-      return mode;
+      Console.WriteLine("Choose how you want to play the game:");
+      Console.WriteLine("1: Player vs Computer");
+      Console.WriteLine("2: Player vs Player");
+      Console.WriteLine("3: Computer vs Computer");
+      
+      int.TryParse(Console.ReadLine(), out int mode);
+      switch (mode)
+      {
+        case 3:
+          return 3;
+        case 2:
+          return 2;
+        default:
+          return 1;
+      }
     }
-    
-    return 1;
   }
 
   private void StoryTime(string playerName)
@@ -111,6 +118,10 @@ public class Game
     Console.WriteLine();
     Console.WriteLine("You stop in your tracks... scared...");
     Console.WriteLine("Taking a deep breath, you remember all the people that you helped. Remembering all the good in this land.");
+    while (Console.KeyAvailable)
+    {
+      Console.ReadKey(false);
+    }
     Console.WriteLine("Press key to continue...");
     Console.ReadKey();
     Console.WriteLine("Breathing out slowly you continue on...");
