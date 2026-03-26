@@ -31,7 +31,7 @@ public static class PlayerInput
             }
 
             int.TryParse(Console.ReadLine(), out int index);
-            if (0 < index && index < options.Count)
+            if (0 <= index && index < options.Count)
             {
                 return index;
             }
