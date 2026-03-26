@@ -1,3 +1,5 @@
+using static FinalBattle.PlayerInput;
+
 namespace FinalBattle;
 
 public static class InventoryManager
@@ -14,28 +16,14 @@ public static class InventoryManager
       Console.WriteLine("Backpack is empty!");
       return;
     }
+
+    List<string> inventoryItems = new List<string>();
+    foreach (Item item in inventory)
+    {
+      inventoryItems.Add(item.Name);
+    }
     
-    if (attacker.Ai)
-    {
-      Random random = new Random();
-      int selection = random.Next(inventory.Count());
-      UserSection(selection, inventory, attacker);
-      return;
-    }
-  
-    if (!attacker.Ai)
-    {
-      for (int i = 0; i < inventory.Count; i++)
-      {
-        Console.WriteLine($"{i + 1} - {inventory[i]}");
-      }
-      Console.WriteLine("What would you like to take? (enter number)");
-      if (int.TryParse(Console.ReadLine(), out int userSelection))
-      {
-        userSelection -= 1;
-        UserSection(userSelection, inventory, attacker);
-      }
-    }
+    SelectInventoryItem(UserSelection(attacker, inventoryItems), inventory, attacker);
   }
   
   /// <summary>
@@ -44,7 +32,7 @@ public static class InventoryManager
   /// <param name="userSelection"></param>
   /// <param name="inventory"></param>
   /// <param name="attacker"></param>
-  private static void UserSection(int userSelection, List<Item> inventory, Character attacker)
+  private static void SelectInventoryItem(int userSelection, List<Item> inventory, Character attacker)
   {
     switch (inventory[userSelection])
     {
