@@ -23,7 +23,7 @@ public static class InventoryManager
       inventoryItems.Add(item.Name);
     }
     
-    SelectInventoryItem(UserSelection(attacker, inventoryItems), inventory, attacker);
+    SelectInventoryItem(UserSelection(attacker, inventoryItems, "What item would you like to use?"), inventory, attacker);
   }
   
   /// <summary>

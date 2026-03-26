@@ -18,7 +18,7 @@ public static class ActionChooser
             enumOptions.Remove("Special");
         }
 
-        int index = UserSelection(attacker, enumOptions);
+        int index = UserSelection(attacker, enumOptions, "What would you like to do?");
         
         return attacker.CurrentAttack = Enum.GetValues<Action>().ElementAt(index);
     }

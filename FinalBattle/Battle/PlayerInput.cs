@@ -7,7 +7,7 @@ public static class PlayerInput
     /// </summary>
     /// <param name="attacker"></param>
     /// <returns></returns>
-    public static int UserSelection(Character attacker, List<string> options)
+    public static int UserSelection(Character attacker, List<string> options, string question)
     {
         if (attacker.Ai)
         {
@@ -24,7 +24,7 @@ public static class PlayerInput
                 Console.ReadKey(false);
             }
             
-            Console.WriteLine("What would you like to do?");
+            Console.WriteLine(question);
             for (int i = 0; i < options.Count; i++)
             {
                 Console.WriteLine($"{i} - {options[i]}");
