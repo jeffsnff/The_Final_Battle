@@ -1,3 +1,5 @@
+using static FinalBattle.PlayerInput;
+
 namespace FinalBattle;
 
 public static class EnemyChooser
@@ -10,27 +12,13 @@ public static class EnemyChooser
     /// <returns></returns>
     public static Character SelectEnemy(Character member, List<Character> enemies)
   {
-    if (member.Ai)
+    List<string> enemyNames = new List<string>();
+    foreach (Character enemy in enemies)
     {
-      Random random = new Random();
-      int index = random.Next(enemies.Count);
-      return enemies[index];
+      enemyNames.Add(enemy.Name);
     }
-    
-    for (int i = 0; i < enemies.Count; i++)
-    {
-      Console.WriteLine($"{i} : {enemies[i].Name}");
-    }
-    
-    Console.Write("Enemy to attack (Input a number): ");
-    if (int.TryParse(Console.ReadLine(), out int enemyNumber))
-    {
-      if (enemyNumber > (enemies.Count - 1) || enemyNumber < 0)
-      {
-        return enemies[0];
-      }
-      return enemies[enemyNumber];
-    }
-    return enemies[0];
+
+    int enemyNumber = UserSelection(member, enemyNames, "What enemy would you like to attack?");
+    return enemies[enemyNumber];
   }
 }
