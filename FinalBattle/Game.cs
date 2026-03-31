@@ -19,17 +19,26 @@ public class Game
     {
       case 1: // Player vs Computer
         heros.party.Add(PickHero());
+        
         enemyWaveOne.party.Add(new Skeleton());
         enemyWaveTwo.party.Add(new Skeleton());
         enemyWaveTwo.party.Add(new Skeleton());
-        enemyWaveTwo.party.Add(new Skeleton());
+        bossBattle.party.Add(new UnCodedOne());
         enemyArmy.Add(enemyWaveOne);
         enemyArmy.Add(enemyWaveTwo);
+        enemyArmy.Add(bossBattle);
         StoryTime(heros.party[0].Name);
         break;
       case 2: // Player vs Player
         heros.party.Add(PickHero());
-        enemyWaveOne.party.Add(new Skeleton());
+        
+        enemyWaveOne.party.Add(new Skeleton(false));
+        enemyWaveTwo.party.Add(new Skeleton(false));
+        enemyWaveTwo.party.Add(new Skeleton(false));
+        bossBattle.party.Add(new UnCodedOne(false));
+        enemyArmy.Add(enemyWaveOne);
+        enemyArmy.Add(enemyWaveTwo);
+        enemyArmy.Add(bossBattle);
         StoryTime(heros.party[0].Name);
         break;
       case 3: // Computer vs Computer

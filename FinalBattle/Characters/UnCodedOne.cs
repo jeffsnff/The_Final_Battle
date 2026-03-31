@@ -1,6 +1,6 @@
 namespace FinalBattle;
 
-public class UnCodedOne() : Character(true)
+public class UnCodedOne(bool computerControlled = true) : Character(computerControlled)
 {
   public override string Name { get; } = "UNCODED ONE";
   public override int MaxHp { get; protected set; } = 15;
